@@ -17,8 +17,8 @@
     --border: #dde3ec;
     --muted:  #6b7a8d;
     --actor-color: #041E42;
-    --eval-color: #C8102E;
-    --sit-color: #8a9bb0;
+    --eval-color:  #C8102E;
+    --sit-color:   #7a8fa6;
   }
 
   body {
@@ -40,404 +40,343 @@
     top: 0;
     z-index: 100;
   }
-  .nav-brand {
-    display: flex;
-    flex-direction: column;
-    line-height: 1;
-  }
+  .nav-brand { display: flex; flex-direction: column; line-height: 1; }
   .nav-brand-name {
     font-family: 'Libre Baskerville', serif;
-    font-size: .95rem;
-    font-weight: 700;
-    color: white;
-    letter-spacing: .02em;
+    font-size: .95rem; font-weight: 700; color: white; letter-spacing: .02em;
   }
   .nav-brand-sub {
-    font-size: .52rem;
-    font-weight: 700;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.5);
-    margin-top: 2px;
+    font-size: .52rem; font-weight: 700; letter-spacing: .18em;
+    text-transform: uppercase; color: rgba(255,255,255,.5); margin-top: 2px;
   }
-  .nav-tag {
-    font-size: .72rem;
-    font-weight: 500;
-    color: rgba(255,255,255,.55);
-    letter-spacing: .04em;
-  }
+  .nav-tag { font-size: .72rem; font-weight: 500; color: rgba(255,255,255,.55); }
 
   /* ── HERO ── */
   .hero {
-    background: var(--navy);
-    color: white;
-    padding: 5rem 2rem 4.5rem;
-    text-align: center;
+    background: var(--navy); color: white;
+    padding: 5rem 2rem 4.5rem; text-align: center;
   }
   .eyebrow {
-    font-size: .6rem;
-    font-weight: 700;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 1rem;
+    font-size: .6rem; font-weight: 700; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--red); margin-bottom: 1rem;
   }
   .hero h1 {
     font-family: 'Libre Baskerville', serif;
     font-size: clamp(2.4rem, 5vw, 4rem);
-    font-weight: 700;
-    line-height: 1.15;
-    margin-bottom: 1.25rem;
+    font-weight: 700; line-height: 1.15; margin-bottom: 1.25rem;
   }
-  .hero h1 em {
-    font-style: italic;
-    color: rgba(255,255,255,.75);
-  }
+  .hero h1 em { font-style: italic; color: rgba(255,255,255,.75); }
   .hero-sub {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    font-weight: 300;
-    color: rgba(255,255,255,.65);
-    max-width: 600px;
-    margin: 0 auto;
+    font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 300;
+    color: rgba(255,255,255,.65); max-width: 600px; margin: 0 auto;
   }
 
-  /* ── SECTION WRAPPERS ── */
-  .section {
-    padding: 5rem 2rem;
-  }
+  /* ── SECTIONS ── */
+  .section { padding: 5rem 2rem; }
   .section.bg-accent { background: var(--accent); }
   .section.bg-white  { background: #fff; }
-
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-  }
+  .container { max-width: 1000px; margin: 0 auto; }
 
   .section-label {
-    font-size: .6rem;
-    font-weight: 700;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: .6rem;
+    font-size: .6rem; font-weight: 700; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--red); margin-bottom: .6rem;
   }
   .section-title {
     font-family: 'Libre Baskerville', serif;
     font-size: clamp(1.6rem, 3vw, 2.4rem);
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--navy);
-    line-height: 1.25;
+    font-weight: 700; margin-bottom: 1rem; color: var(--navy); line-height: 1.25;
   }
   .section-intro {
-    font-size: 1.05rem;
-    color: var(--muted);
-    max-width: 680px;
-    margin-bottom: 3rem;
+    font-size: 1.05rem; color: var(--muted); max-width: 680px; margin-bottom: 3rem;
   }
 
-  /* ── CONCEPT BLOCKS ── */
+  /* ── CONCEPT CARDS ── */
   .concept-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
   }
   .concept-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 1.75rem;
-    position: relative;
-    overflow: hidden;
+    background: white; border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.75rem;
+    position: relative; overflow: hidden;
   }
   .concept-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 4px;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
   }
-  .concept-card.actor::before   { background: var(--actor-color); }
-  .concept-card.evaluator::before { background: var(--eval-color); }
+  .concept-card.actor::before       { background: var(--actor-color); }
+  .concept-card.evaluator::before   { background: var(--eval-color); }
   .concept-card.situational::before { background: var(--sit-color); }
-  .concept-card.overview::before { background: linear-gradient(90deg, var(--actor-color), var(--eval-color), var(--sit-color)); }
-  .concept-card.insight::before  { background: linear-gradient(90deg, var(--eval-color), var(--actor-color)); }
+  .concept-card.overview::before    { background: linear-gradient(90deg, var(--actor-color), var(--eval-color), var(--sit-color)); }
+  .concept-card.insight::before     { background: linear-gradient(90deg, var(--eval-color), var(--actor-color)); }
 
   .concept-tag {
-    display: inline-block;
-    font-size: .55rem;
-    font-weight: 700;
-    letter-spacing: .13em;
-    text-transform: uppercase;
-    padding: .25rem .65rem;
-    border-radius: 20px;
-    margin-bottom: .85rem;
+    display: inline-block; font-size: .55rem; font-weight: 700;
+    letter-spacing: .13em; text-transform: uppercase;
+    padding: .25rem .65rem; border-radius: 20px; margin-bottom: .85rem;
   }
-  .concept-card.actor   .concept-tag { background: rgba(4,30,66,.1);  color: var(--actor-color); }
-  .concept-card.evaluator .concept-tag { background: rgba(200,16,46,.1); color: var(--eval-color); }
-  .concept-card.situational .concept-tag { background: rgba(138,155,176,.15); color: #5a6e82; }
-  .concept-card.overview .concept-tag, .concept-card.insight .concept-tag { background: var(--accent); color: var(--navy); }
+  .concept-card.actor       .concept-tag { background: rgba(4,30,66,.1);    color: var(--actor-color); }
+  .concept-card.evaluator   .concept-tag { background: rgba(200,16,46,.1);  color: var(--eval-color); }
+  .concept-card.situational .concept-tag { background: rgba(122,143,166,.15); color: #4a6070; }
+  .concept-card.overview    .concept-tag,
+  .concept-card.insight     .concept-tag { background: var(--accent); color: var(--navy); }
 
   .concept-card h3 {
     font-family: 'Libre Baskerville', serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: .6rem;
-    color: var(--navy);
+    font-size: 1.1rem; font-weight: 700; margin-bottom: .6rem; color: var(--navy);
   }
-  .concept-card p {
-    font-size: .92rem;
-    color: var(--muted);
-    line-height: 1.65;
-  }
+  .concept-card p { font-size: .92rem; color: var(--muted); line-height: 1.65; }
 
-  /* ── INTERACTIVE TOOL ── */
-  .tool-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-    align-items: start;
-  }
-  @media (max-width: 720px) {
-    .tool-layout { grid-template-columns: 1fr; }
-  }
-
-  .tool-left {}
-  .tool-right {
-    position: sticky;
-    top: 84px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
-  }
-
+  /* ── PROBLEM INPUT ── */
   .problem-label {
-    font-size: .75rem;
-    font-weight: 700;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--navy);
-    margin-bottom: .5rem;
+    font-size: .75rem; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--navy); margin-bottom: .5rem;
   }
   textarea.problem-input {
-    width: 100%;
-    min-height: 100px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    padding: .9rem 1rem;
-    font-family: 'Outfit', sans-serif;
-    font-size: .95rem;
-    color: var(--navy);
-    resize: vertical;
-    outline: none;
-    transition: border-color .2s;
-    margin-bottom: 1.75rem;
-    background: white;
+    width: 100%; min-height: 80px;
+    border: 1.5px solid var(--border); border-radius: 10px;
+    padding: .85rem 1rem; font-family: 'Outfit', sans-serif;
+    font-size: .95rem; color: var(--navy); resize: vertical;
+    outline: none; transition: border-color .2s; margin-bottom: 2.5rem; background: white;
   }
   textarea.problem-input:focus { border-color: var(--navy); }
   textarea.problem-input::placeholder { color: var(--muted); font-style: italic; }
 
-  /* ── ERROR PANELS ── */
-  .error-panel {
-    border-radius: 12px;
-    border: 1.5px solid var(--border);
-    padding: 1.5rem;
-    margin-bottom: 1.25rem;
+  /* ── VIZ STAGE ── */
+  .viz-stage {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    min-height: 460px;
+  }
+
+  /* Connectors SVG overlay */
+  .connectors-svg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+  }
+
+  /* ── NODES COLUMN ── */
+  .nodes-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    flex-shrink: 0;
+    z-index: 1;
+    width: 340px;
+  }
+
+  .node-group {
+    display: flex;
+    align-items: center;
+    gap: .85rem;
+  }
+
+  /* Cards */
+  .node-card {
+    flex: 1;
     background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
     position: relative;
     overflow: hidden;
   }
-  .error-panel::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 5px;
-    height: 100%;
-    border-radius: 12px 0 0 12px;
+  .node-card::before {
+    content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 4px;
   }
-  .error-panel.actor::before    { background: var(--actor-color); }
-  .error-panel.evaluator::before { background: var(--eval-color); }
-  .error-panel.situational::before { background: var(--sit-color); }
+  .actor     .node-card::before { background: var(--actor-color); }
+  .evaluator .node-card::before { background: var(--eval-color); }
+  .situational .node-card::before { background: var(--sit-color); }
 
-  .panel-header {
-    display: flex;
-    align-items: center;
-    gap: .6rem;
-    margin-bottom: .5rem;
+  .node-card-tag {
+    display: block; font-size: .52rem; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; margin-bottom: .25rem; padding-left: .1rem;
   }
-  .panel-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .actor .panel-dot    { background: var(--actor-color); }
-  .evaluator .panel-dot { background: var(--eval-color); }
-  .situational .panel-dot { background: var(--sit-color); }
+  .actor       .node-card-tag { color: var(--actor-color); }
+  .evaluator   .node-card-tag { color: var(--eval-color); }
+  .situational .node-card-tag { color: #4a6070; }
 
-  .panel-name {
-    font-size: .7rem;
-    font-weight: 700;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--navy);
+  .node-card h4 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: .88rem; font-weight: 700; color: var(--navy);
+    margin-bottom: .3rem; padding-left: .1rem;
   }
-  .panel-desc {
-    font-size: .82rem;
-    color: var(--muted);
-    margin-bottom: 1rem;
-    line-height: 1.55;
+  .node-card .card-desc {
+    font-size: .78rem; color: var(--muted); line-height: 1.5;
+    margin-bottom: .7rem; padding-left: .1rem;
   }
-  textarea.panel-notes {
-    width: 100%;
-    min-height: 72px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: .65rem .8rem;
-    font-family: 'Outfit', sans-serif;
-    font-size: .88rem;
-    color: var(--navy);
-    resize: vertical;
-    outline: none;
-    transition: border-color .2s;
-    margin-bottom: 1rem;
-    background: #fafbfd;
-  }
-  textarea.panel-notes:focus { border-color: var(--border); background: white; }
-  textarea.panel-notes::placeholder { color: #aab3c0; font-style: italic; }
-
-  .slider-row {
-    display: flex;
-    align-items: center;
-    gap: .75rem;
-  }
-  .slider-label {
-    font-size: .7rem;
-    font-weight: 600;
-    color: var(--muted);
-    white-space: nowrap;
-  }
-  input[type=range] {
-    -webkit-appearance: none;
-    appearance: none;
-    flex: 1;
-    height: 5px;
-    border-radius: 4px;
-    background: var(--border);
-    outline: none;
-    cursor: pointer;
-  }
-  .actor-panel input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 16px; height: 16px;
-    border-radius: 50%;
-    background: var(--actor-color);
-    cursor: pointer;
-  }
-  .evaluator-panel input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 16px; height: 16px;
-    border-radius: 50%;
-    background: var(--eval-color);
-    cursor: pointer;
-  }
-  .situational-panel input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 16px; height: 16px;
-    border-radius: 50%;
-    background: var(--sit-color);
-    cursor: pointer;
-  }
-  .slider-val {
-    font-size: .85rem;
-    font-weight: 700;
-    min-width: 1.5rem;
-    text-align: center;
-  }
-  .actor-panel    .slider-val { color: var(--actor-color); }
-  .evaluator-panel .slider-val { color: var(--eval-color); }
-  .situational-panel .slider-val { color: var(--sit-color); }
-
-  /* ── SVG RINGS ── */
-  .ring-wrap {
-    width: 100%;
-    max-width: 320px;
-  }
-  .ring-wrap svg {
-    width: 100%;
-    height: auto;
+  .node-card textarea {
+    width: 100%; min-height: 52px;
+    border: 1px solid var(--border); border-radius: 7px;
+    padding: .45rem .6rem; font-family: 'Outfit', sans-serif;
+    font-size: .78rem; color: var(--navy); resize: none;
+    outline: none; background: #fafbfd; transition: border-color .2s;
     display: block;
   }
+  .node-card textarea:focus { border-color: #aab3c0; background: white; }
+  .node-card textarea::placeholder { color: #bbb; font-style: italic; }
 
-  .ring-legend {
+  /* Node circles */
+  .node-circle {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    border: 3px solid;
     display: flex;
     flex-direction: column;
-    gap: .45rem;
-    width: 100%;
-    max-width: 320px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: white;
+    user-select: none;
+    position: relative;
+    gap: 0;
   }
-  .legend-row {
+  .actor       .node-circle { border-color: var(--actor-color); }
+  .evaluator   .node-circle { border-color: var(--eval-color); }
+  .situational .node-circle { border-color: var(--sit-color); }
+
+  .node-val {
+    font-size: 1.5rem; font-weight: 700; line-height: 1;
+    font-family: 'Outfit', sans-serif;
+  }
+  .actor       .node-val { color: var(--actor-color); }
+  .evaluator   .node-val { color: var(--eval-color); }
+  .situational .node-val { color: var(--sit-color); }
+
+  .node-pct {
+    font-size: .62rem; font-weight: 600; line-height: 1;
+    margin-top: 2px; color: var(--muted);
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .stepper-row {
     display: flex;
     align-items: center;
-    gap: .55rem;
-    font-size: .8rem;
-    color: var(--muted);
+    gap: 4px;
+    margin-top: 3px;
   }
-  .legend-dot {
-    width: 11px;
-    height: 11px;
+  .step-btn {
+    width: 20px; height: 20px;
+    border: 1.5px solid var(--border);
     border-radius: 50%;
+    background: white;
+    font-size: .9rem; font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    transition: background .15s, border-color .15s, color .15s;
+    padding: 0;
+    font-family: 'Outfit', sans-serif;
+  }
+  .step-btn:hover { background: var(--accent); border-color: var(--navy); color: var(--navy); }
+  .step-btn:active { transform: scale(.92); }
+
+  /* ── MAIN CIRCLE AREA ── */
+  .main-circle-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    z-index: 1;
+  }
+
+  .main-circle-wrap {
+    position: relative;
+    width: 280px;
+    height: 280px;
     flex-shrink: 0;
   }
-  .legend-dot.actor    { background: var(--actor-color); }
-  .legend-dot.evaluator { background: var(--eval-color); }
-  .legend-dot.situational { background: var(--sit-color); }
-  .legend-row strong { font-weight: 600; color: var(--navy); }
+  #main-svg {
+    width: 280px;
+    height: 280px;
+    display: block;
+    filter: drop-shadow(0 4px 24px rgba(4,30,66,.18));
+    border-radius: 50%;
+    transition: filter .3s;
+  }
 
-  .ring-summary {
-    font-size: .82rem;
-    color: var(--muted);
+  .circle-label-overlay {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 130px;
     text-align: center;
-    max-width: 280px;
-    line-height: 1.5;
-    font-style: italic;
+    pointer-events: none;
   }
-  .ring-empty-hint {
+  .circle-label-overlay input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-family: 'Libre Baskerville', serif;
     font-size: .8rem;
-    color: #bbb;
-    text-align: center;
     font-style: italic;
+    color: white;
+    outline: none;
+    text-shadow: 0 1px 6px rgba(0,0,0,.55);
+    line-height: 1.45;
+    pointer-events: all;
+    cursor: text;
   }
+  .circle-label-overlay input::placeholder { color: rgba(255,255,255,.45); }
+
+  /* Summary */
+  .viz-summary {
+    font-size: .82rem; color: var(--muted);
+    text-align: center; font-style: italic;
+    max-width: 300px; line-height: 1.5; min-height: 1.2em;
+  }
+
+  /* Pct bar */
+  .pct-bar {
+    display: flex;
+    gap: 0;
+    width: 280px;
+    height: 8px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--border);
+  }
+  .pct-seg { height: 100%; transition: width .35s cubic-bezier(.4,0,.2,1); }
+  .pct-seg.actor-seg   { background: var(--actor-color); }
+  .pct-seg.eval-seg    { background: var(--eval-color); }
+  .pct-seg.sit-seg     { background: var(--sit-color); }
 
   /* ── RESET BUTTON ── */
   .reset-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: .4rem;
-    padding: .65rem 1.5rem;
-    border-radius: 8px;
-    border: 1.5px solid var(--border);
-    background: white;
-    font-family: 'Outfit', sans-serif;
-    font-size: .85rem;
-    font-weight: 600;
-    color: var(--muted);
-    cursor: pointer;
+    display: inline-flex; align-items: center; gap: .4rem;
+    padding: .65rem 1.5rem; border-radius: 8px;
+    border: 1.5px solid var(--border); background: white;
+    font-family: 'Outfit', sans-serif; font-size: .85rem;
+    font-weight: 600; color: var(--muted); cursor: pointer;
     transition: border-color .2s, color .2s, background .2s;
   }
   .reset-btn:hover { border-color: var(--navy); color: var(--navy); background: var(--accent); }
 
   /* ── FOOTER ── */
   footer {
-    background: var(--navy);
-    color: rgba(255,255,255,.45);
-    text-align: center;
-    padding: 2rem;
-    font-size: .8rem;
-    font-weight: 400;
-    letter-spacing: .02em;
+    background: var(--navy); color: rgba(255,255,255,.45);
+    text-align: center; padding: 2rem;
+    font-size: .8rem; font-weight: 400; letter-spacing: .02em;
   }
   footer strong { color: rgba(255,255,255,.75); font-weight: 600; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 740px) {
+    .viz-stage { flex-direction: column; min-height: auto; gap: 2rem; }
+    .nodes-col { width: 100%; }
+    .node-group { flex-direction: row; }
+    .node-card { min-width: 0; }
+    .main-circle-area { width: 100%; }
+    .pct-bar { width: 100%; max-width: 280px; }
+  }
 </style>
 </head>
 <body>
@@ -466,42 +405,31 @@
     <p class="section-intro">Every flawed decision can be examined through three distinct lenses. Understanding which type of error dominated helps you know what to fix — and what to forgive.</p>
 
     <div class="concept-grid">
-
-      <!-- Overview -->
       <div class="concept-card overview" style="grid-column: 1 / -1;">
         <span class="concept-tag">Overview</span>
         <h3>Why Errors Are Worth Classifying</h3>
         <p>Not all mistakes are created equal. Some errors stem from the person making the decision — their knowledge, biases, or intentions. Others emerge from the systems used to evaluate that decision. Still others are products of forces entirely outside anyone's control. Without a framework, we tend to blame the nearest person. With one, we can act more precisely.</p>
       </div>
-
-      <!-- Actor Error -->
       <div class="concept-card actor">
         <span class="concept-tag">Actor Error</span>
         <h3>The Decision-Maker's Contribution</h3>
         <p>Actor errors arise from the individual at the center of the decision. This includes cognitive shortcuts, limited expertise, conflicting incentives, or deliberate choice. The actor is who we most naturally assign blame to — but only one type of error is fully theirs.</p>
       </div>
-
-      <!-- Evaluator Error -->
       <div class="concept-card evaluator">
         <span class="concept-tag">Evaluator Error</span>
         <h3>The System's Role in Judgment</h3>
         <p>Evaluator errors occur in how a decision is assessed — not in the decision itself. Flawed metrics, biased reviewers, inconsistent criteria, or misaligned incentive structures all produce evaluator error. The decision may have been reasonable; the evaluation was not.</p>
       </div>
-
-      <!-- Situational Error -->
       <div class="concept-card situational">
         <span class="concept-tag">Situational Error</span>
         <h3>Context Beyond Anyone's Control</h3>
         <p>Situational errors emerge from the environment surrounding a decision — timing, information availability, resource constraints, or unpredictable external events. Even ideal actors in well-designed systems can produce poor outcomes when the situation itself is hostile to good decisions.</p>
       </div>
-
-      <!-- Insight -->
       <div class="concept-card insight" style="grid-column: 1 / -1;">
         <span class="concept-tag">Key Insight</span>
         <h3>Most Real Errors Are Mixed</h3>
         <p>In practice, bad outcomes reflect all three error types in varying proportions. The framework is most powerful not as a blame-assignment tool, but as a diagnostic one. By distributing responsibility across actor, evaluator, and situation, you surface what actually needs to change — training, systems redesign, or environmental support — rather than simply finding someone to hold accountable.</p>
       </div>
-
     </div>
   </div>
 </section>
@@ -511,99 +439,104 @@
   <div class="container">
     <p class="section-label">Interactive Tool</p>
     <h2 class="section-title">Analyze a Decision</h2>
-    <p class="section-intro">Describe a decision or outcome below, then rate the contribution of each error type. The visualization will update as you adjust the sliders.</p>
+    <p class="section-intro">Describe a decision or outcome, then use the + / − buttons to rate each error type's contribution. The circle updates proportionally as you adjust the weights.</p>
 
-    <div class="tool-layout">
+    <!-- Problem statement -->
+    <p class="problem-label">Describe the decision or outcome</p>
+    <textarea class="problem-input" id="problem" placeholder="Briefly describe the decision, outcome, or situation you want to analyze…"></textarea>
 
-      <!-- LEFT: inputs -->
-      <div class="tool-left">
+    <!-- Viz stage -->
+    <div class="viz-stage" id="viz-stage">
 
-        <!-- Problem statement -->
-        <p class="problem-label">Describe the decision or outcome</p>
-        <textarea class="problem-input" id="problem" placeholder="Briefly describe the decision, outcome, or situation you want to analyze…"></textarea>
+      <!-- SVG connector lines (absolutely positioned behind everything) -->
+      <svg class="connectors-svg" id="connectors-svg" xmlns="http://www.w3.org/2000/svg"></svg>
 
-        <!-- Actor Panel -->
-        <div class="error-panel actor actor-panel">
-          <div class="panel-header">
-            <div class="panel-dot"></div>
-            <span class="panel-name">Actor Error</span>
+      <!-- LEFT: Three node groups -->
+      <div class="nodes-col" id="nodes-col">
+
+        <!-- Actor -->
+        <div class="node-group actor" id="node-actor">
+          <div class="node-card">
+            <span class="node-card-tag">Actor Error</span>
+            <h4>The Decision-Maker</h4>
+            <p class="card-desc">The person's own choices, knowledge gaps, cognitive shortcuts, or intentions.</p>
+            <textarea id="actor-notes" placeholder="Notes on actor-level factors…"></textarea>
           </div>
-          <p class="panel-desc">How much did the decision-maker's own choices, knowledge gaps, biases, or intentions contribute to this outcome?</p>
-          <textarea class="panel-notes" id="actor-notes" placeholder="Notes on actor-level factors…"></textarea>
-          <div class="slider-row">
-            <span class="slider-label">Contribution</span>
-            <input type="range" id="actor-slider" min="0" max="10" value="5" oninput="updateViz()">
-            <span class="slider-val" id="actor-val">5</span>
-          </div>
-        </div>
-
-        <!-- Evaluator Panel -->
-        <div class="error-panel evaluator evaluator-panel">
-          <div class="panel-header">
-            <div class="panel-dot"></div>
-            <span class="panel-name">Evaluator Error</span>
-          </div>
-          <p class="panel-desc">How much did flawed measurement, biased review processes, or misaligned evaluation criteria contribute?</p>
-          <textarea class="panel-notes" id="eval-notes" placeholder="Notes on evaluator-level factors…"></textarea>
-          <div class="slider-row">
-            <span class="slider-label">Contribution</span>
-            <input type="range" id="eval-slider" min="0" max="10" value="5" oninput="updateViz()">
-            <span class="slider-val" id="eval-val">5</span>
+          <div class="node-circle" id="nc-actor">
+            <span class="node-val" id="actor-val">5</span>
+            <span class="node-pct" id="actor-pct">33%</span>
+            <div class="stepper-row">
+              <button class="step-btn" onclick="step('actor',-1)" aria-label="decrease actor">−</button>
+              <button class="step-btn" onclick="step('actor',1)"  aria-label="increase actor">+</button>
+            </div>
           </div>
         </div>
 
-        <!-- Situational Panel -->
-        <div class="error-panel situational situational-panel">
-          <div class="panel-header">
-            <div class="panel-dot"></div>
-            <span class="panel-name">Situational Error</span>
+        <!-- Evaluator -->
+        <div class="node-group evaluator" id="node-eval">
+          <div class="node-card">
+            <span class="node-card-tag">Evaluator Error</span>
+            <h4>The Evaluation System</h4>
+            <p class="card-desc">Flawed metrics, biased review processes, or misaligned criteria used to assess the decision.</p>
+            <textarea id="eval-notes" placeholder="Notes on evaluator-level factors…"></textarea>
           </div>
-          <p class="panel-desc">How much did external constraints, timing, limited information, or environmental factors outside anyone's control contribute?</p>
-          <textarea class="panel-notes" id="sit-notes" placeholder="Notes on situational factors…"></textarea>
-          <div class="slider-row">
-            <span class="slider-label">Contribution</span>
-            <input type="range" id="sit-slider" min="0" max="10" value="5" oninput="updateViz()">
-            <span class="slider-val" id="sit-val">5</span>
-          </div>
-        </div>
-
-        <!-- Reset -->
-        <button class="reset-btn" onclick="resetTool()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-          Reset
-        </button>
-
-      </div><!-- /tool-left -->
-
-      <!-- RIGHT: visualization -->
-      <div class="tool-right">
-
-        <div class="ring-wrap">
-          <svg id="ring-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-            <!-- Rings drawn by JS -->
-          </svg>
-        </div>
-
-        <div class="ring-legend">
-          <div class="legend-row">
-            <div class="legend-dot actor"></div>
-            <span><strong>Actor</strong> — innermost ring</span>
-          </div>
-          <div class="legend-row">
-            <div class="legend-dot evaluator"></div>
-            <span><strong>Evaluator</strong> — middle ring</span>
-          </div>
-          <div class="legend-row">
-            <div class="legend-dot situational"></div>
-            <span><strong>Situational</strong> — outer ring</span>
+          <div class="node-circle" id="nc-eval">
+            <span class="node-val" id="eval-val">5</span>
+            <span class="node-pct" id="eval-pct">33%</span>
+            <div class="stepper-row">
+              <button class="step-btn" onclick="step('eval',-1)" aria-label="decrease evaluator">−</button>
+              <button class="step-btn" onclick="step('eval',1)"  aria-label="increase evaluator">+</button>
+            </div>
           </div>
         </div>
 
-        <p class="ring-summary" id="ring-summary"></p>
+        <!-- Situational -->
+        <div class="node-group situational" id="node-sit">
+          <div class="node-card">
+            <span class="node-card-tag">Situational Error</span>
+            <h4>The Environment</h4>
+            <p class="card-desc">External constraints, timing, limited information, or forces outside anyone's control.</p>
+            <textarea id="sit-notes" placeholder="Notes on situational factors…"></textarea>
+          </div>
+          <div class="node-circle" id="nc-sit">
+            <span class="node-val" id="sit-val">5</span>
+            <span class="node-pct" id="sit-pct">33%</span>
+            <div class="stepper-row">
+              <button class="step-btn" onclick="step('sit',-1)" aria-label="decrease situational">−</button>
+              <button class="step-btn" onclick="step('sit',1)"  aria-label="increase situational">+</button>
+            </div>
+          </div>
+        </div>
 
-      </div><!-- /tool-right -->
+      </div><!-- /nodes-col -->
 
-    </div><!-- /tool-layout -->
+      <!-- RIGHT: Main circle visualization -->
+      <div class="main-circle-area">
+        <div class="main-circle-wrap">
+          <svg id="main-svg" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg"></svg>
+          <div class="circle-label-overlay">
+            <input type="text" id="circle-label" placeholder="Label this decision…" maxlength="60">
+          </div>
+        </div>
+
+        <!-- Proportional bar -->
+        <div class="pct-bar" id="pct-bar">
+          <div class="pct-seg actor-seg" id="bar-actor" style="width:33.3%"></div>
+          <div class="pct-seg eval-seg"  id="bar-eval"  style="width:33.3%"></div>
+          <div class="pct-seg sit-seg"   id="bar-sit"   style="width:33.3%"></div>
+        </div>
+
+        <p class="viz-summary" id="viz-summary">Actor 33% · Evaluator 33% · Situational 33%</p>
+      </div>
+
+    </div><!-- /viz-stage -->
+
+    <div style="text-align:center; margin-top:2.5rem;">
+      <button class="reset-btn" onclick="resetTool()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        Reset
+      </button>
+    </div>
 
   </div>
 </section>
@@ -615,104 +548,219 @@
 </footer>
 
 <script>
-  const CX = 150, CY = 150, MAX_R = 130, MIN_R = 10;
+  const vals = { actor: 5, eval: 5, sit: 5 };
+  const COLORS = {
+    actor: '#041E42',
+    eval:  '#C8102E',
+    sit:   '#7a8fa6'
+  };
+  const CX = 140, CY = 140, R = 124;
 
-  // Area-proportional radius: r = sqrt(area / π), scale areas by value
-  function areaRadius(val, maxVal) {
-    if (maxVal === 0) return MIN_R;
-    const frac = val / maxVal;
-    return Math.max(MIN_R, Math.sqrt(frac) * MAX_R);
-  }
-
-  function updateViz() {
-    const aVal = +document.getElementById('actor-slider').value;
-    const eVal = +document.getElementById('eval-slider').value;
-    const sVal = +document.getElementById('sit-slider').value;
-
-    document.getElementById('actor-val').textContent = aVal;
-    document.getElementById('eval-val').textContent   = eVal;
-    document.getElementById('sit-val').textContent    = sVal;
-
-    const maxVal = Math.max(aVal, eVal, sVal, 1);
-
-    // Radii: area proportional
-    // Outer (Situational) radius relative to its own value at max
-    // Each ring radius is independent — they're concentric, not stacked
-    // Outermost (situational) is largest possible, innermost (actor) is smallest
-    // We scale each to its proportion of the max value, but maintain the visual nesting
-    // by ensuring outer >= middle >= inner spacing-wise.
-    // Approach: allocate radii in layers — situational uses full range, evaluator uses 75%, actor uses 50%
-    const rSit = areaRadius(sVal, maxVal) * 1.0;
-    const rEval = areaRadius(eVal, maxVal) * 0.72;
-    const rAct  = areaRadius(aVal, maxVal) * 0.45;
-
-    const svg = document.getElementById('ring-svg');
-    svg.innerHTML = `
-      <!-- Background circle -->
-      <circle cx="${CX}" cy="${CY}" r="${MAX_R}" fill="none" stroke="#edf0f5" stroke-width="1"/>
-
-      <!-- Situational ring (outermost) -->
-      <circle cx="${CX}" cy="${CY}" r="${rSit.toFixed(1)}"
-        fill="${sVal === 0 ? 'none' : 'rgba(138,155,176,.18)'}"
-        stroke="${sVal === 0 ? '#dde3ec' : 'var(--sit-color)'}"
-        stroke-width="${sVal === 0 ? '1' : '2'}"
-        stroke-dasharray="${sVal === 0 ? '4 4' : 'none'}"
-      />
-
-      <!-- Evaluator ring (middle) -->
-      <circle cx="${CX}" cy="${CY}" r="${rEval.toFixed(1)}"
-        fill="${eVal === 0 ? 'none' : 'rgba(200,16,46,.12)'}"
-        stroke="${eVal === 0 ? '#dde3ec' : 'var(--eval-color)'}"
-        stroke-width="${eVal === 0 ? '1' : '2'}"
-        stroke-dasharray="${eVal === 0 ? '4 4' : 'none'}"
-      />
-
-      <!-- Actor ring (innermost) -->
-      <circle cx="${CX}" cy="${CY}" r="${rAct.toFixed(1)}"
-        fill="${aVal === 0 ? 'none' : 'rgba(4,30,66,.18)'}"
-        stroke="${aVal === 0 ? '#dde3ec' : 'var(--actor-color)'}"
-        stroke-width="${aVal === 0 ? '1' : '2.5'}"
-        stroke-dasharray="${aVal === 0 ? '4 4' : 'none'}"
-      />
-
-      <!-- Value labels -->
-      ${sVal > 0 ? `<text x="${CX}" y="${CY - rSit - 7}" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="600" fill="var(--sit-color)">${sVal}</text>` : ''}
-      ${eVal > 0 ? `<text x="${CX}" y="${CY - rEval - 7}" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="600" fill="var(--eval-color)">${eVal}</text>` : ''}
-      ${aVal > 0 ? `<text x="${CX}" y="${CY - rAct - 7}" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="600" fill="var(--actor-color)">${aVal}</text>` : ''}
-    `;
-
-    updateSummary(aVal, eVal, sVal);
-  }
-
-  function updateSummary(a, e, s) {
-    const el = document.getElementById('ring-summary');
-    const total = a + e + s;
-    if (total === 0) { el.textContent = ''; return; }
-
-    const dominant = (a >= e && a >= s) ? 'Actor'
-                   : (e >= a && e >= s) ? 'Evaluator'
-                   : 'Situational';
-
-    const ap = Math.round(a / total * 100);
-    const ep = Math.round(e / total * 100);
-    const sp = Math.round(s / total * 100);
-
-    el.textContent = `${dominant} error dominates. Actor ${ap}% · Evaluator ${ep}% · Situational ${sp}%`;
-  }
-
-  function resetTool() {
-    document.getElementById('problem').value    = '';
-    document.getElementById('actor-notes').value = '';
-    document.getElementById('eval-notes').value  = '';
-    document.getElementById('sit-notes').value   = '';
-    ['actor','eval','sit'].forEach(id => {
-      document.getElementById(id + '-slider').value = 5;
-    });
+  function step(type, dir) {
+    vals[type] = Math.max(0, Math.min(10, vals[type] + dir));
     updateViz();
   }
 
-  // Initial render
-  updateViz();
+  function updateViz() {
+    const a = vals.actor, e = vals.eval, s = vals.sit;
+    const total = a + e + s;
+
+    // Update number displays
+    document.getElementById('actor-val').textContent = a;
+    document.getElementById('eval-val').textContent  = e;
+    document.getElementById('sit-val').textContent   = s;
+
+    // Percentages
+    const ap = total > 0 ? Math.round(a / total * 100) : 0;
+    const ep = total > 0 ? Math.round(e / total * 100) : 0;
+    const sp = total > 0 ? (100 - ap - ep) : 0; // avoids rounding drift
+
+    document.getElementById('actor-pct').textContent = total > 0 ? ap + '%' : '—';
+    document.getElementById('eval-pct').textContent  = total > 0 ? ep + '%' : '—';
+    document.getElementById('sit-pct').textContent   = total > 0 ? sp + '%' : '—';
+
+    // Pct bar
+    document.getElementById('bar-actor').style.width = (total > 0 ? ap : 0) + '%';
+    document.getElementById('bar-eval').style.width  = (total > 0 ? ep : 0) + '%';
+    document.getElementById('bar-sit').style.width   = (total > 0 ? sp : 0) + '%';
+
+    // Draw main circle
+    drawMainCircle(a, e, s, total, ap, ep, sp);
+
+    // Summary text
+    const summaryEl = document.getElementById('viz-summary');
+    if (total === 0) {
+      summaryEl.textContent = 'Set values to see the breakdown.';
+    } else {
+      const dominant = ap >= ep && ap >= sp ? 'Actor'
+                     : ep >= ap && ep >= sp ? 'Evaluator'
+                     : 'Situational';
+      summaryEl.textContent = `${dominant} error dominates · Actor ${ap}% · Evaluator ${ep}% · Situational ${sp}%`;
+    }
+
+    // Redraw connectors (deferred to next paint so positions are current)
+    requestAnimationFrame(drawConnectors);
+  }
+
+  function drawMainCircle(a, e, s, total, ap, ep, sp) {
+    const svg = document.getElementById('main-svg');
+
+    if (total === 0) {
+      svg.innerHTML = `
+        <circle cx="${CX}" cy="${CY}" r="${R}" fill="#f5f7fa" stroke="#dde3ec" stroke-width="1.5" stroke-dasharray="6 5"/>
+        <text x="${CX}" y="${CY - 8}" text-anchor="middle" dominant-baseline="middle"
+          font-family="Outfit,sans-serif" font-size="12" fill="#bbb" font-style="italic">
+          Use + to set values
+        </text>`;
+      return;
+    }
+
+    // Area-proportional radii:
+    // Actor is innermost. Its area / total area = a/total
+    // rActor = R * sqrt(a/total)
+    // Evaluator ring occupies next band; rEval = R * sqrt((a+e)/total)
+    // Situational fills to R
+    const rA = R * Math.sqrt(a / total);
+    const rAE = R * Math.sqrt((a + e) / total);
+
+    let html = '';
+
+    // 1. Situational (outermost) — fills entire circle if s > 0
+    if (s > 0) {
+      html += `<circle cx="${CX}" cy="${CY}" r="${R}"
+        fill="rgba(122,143,166,.25)" stroke="rgba(122,143,166,.6)" stroke-width="1.5"/>`;
+    } else {
+      // Thin placeholder ring
+      html += `<circle cx="${CX}" cy="${CY}" r="${R}" fill="#f4f6f9" stroke="#e0e4eb" stroke-width="1"/>`;
+    }
+
+    // 2. Evaluator ring (fills from center to rAE)
+    if (e > 0 || a > 0) {
+      // Only draw evaluator fill if there's eval contribution
+      if (e > 0) {
+        html += `<circle cx="${CX}" cy="${CY}" r="${rAE.toFixed(2)}"
+          fill="rgba(200,16,46,.22)" stroke="rgba(200,16,46,.55)" stroke-width="1.5"/>`;
+      } else {
+        // e = 0, draw actor circle directly over situational
+      }
+    }
+
+    // 3. Actor circle (innermost)
+    if (a > 0) {
+      html += `<circle cx="${CX}" cy="${CY}" r="${rA.toFixed(2)}"
+        fill="rgba(4,30,66,.85)" stroke="rgba(4,30,66,.9)" stroke-width="1.5"/>`;
+    }
+
+    // Zone percentage labels — placed at mid-radius, offset up by 45°
+    const labelAngle = -Math.PI / 2; // top
+    // Situational label: midpoint between rAE and R
+    if (s > 0 && (R - rAE) > 16) {
+      const rMid = (rAE + R) / 2;
+      const lx = CX + rMid * Math.cos(labelAngle + 0.6);
+      const ly = CY + rMid * Math.sin(labelAngle + 0.6);
+      html += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle"
+        dominant-baseline="middle" font-family="Outfit,sans-serif" font-size="11"
+        font-weight="700" fill="rgba(80,100,120,.85)">${sp}%</text>`;
+    }
+    // Evaluator label: midpoint between rA and rAE
+    if (e > 0 && (rAE - rA) > 16) {
+      const rMid = (rA + rAE) / 2;
+      const lx = CX + rMid * Math.cos(labelAngle - 0.5);
+      const ly = CY + rMid * Math.sin(labelAngle - 0.5);
+      html += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle"
+        dominant-baseline="middle" font-family="Outfit,sans-serif" font-size="11"
+        font-weight="700" fill="rgba(200,16,46,.9)">${ep}%</text>`;
+    }
+    // Actor label: center
+    if (a > 0 && rA > 22) {
+      html += `<text x="${CX}" y="${CY + 16}" text-anchor="middle"
+        dominant-baseline="middle" font-family="Outfit,sans-serif" font-size="11"
+        font-weight="700" fill="rgba(255,255,255,.8)">${ap}%</text>`;
+    }
+
+    svg.innerHTML = html;
+  }
+
+  function drawConnectors() {
+    const stage = document.getElementById('viz-stage');
+    const mainSvg = document.getElementById('main-svg');
+    const connSvg = document.getElementById('connectors-svg');
+
+    const stageRect = stage.getBoundingClientRect();
+    const mainRect  = mainSvg.getBoundingClientRect();
+
+    const mainCX = mainRect.left + mainRect.width  / 2 - stageRect.left;
+    const mainCY = mainRect.top  + mainRect.height / 2 - stageRect.top;
+    const mainR  = mainRect.width / 2;
+
+    const nodes = [
+      { id: 'nc-actor', color: COLORS.actor },
+      { id: 'nc-eval',  color: COLORS.eval  },
+      { id: 'nc-sit',   color: COLORS.sit   },
+    ];
+
+    let svgHtml = '';
+
+    nodes.forEach(({ id, color }) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const nx = r.left + r.width  / 2 - stageRect.left;
+      const ny = r.top  + r.height / 2 - stageRect.top;
+      const nr = r.width / 2;
+
+      const dx = mainCX - nx;
+      const dy = mainCY - ny;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 2) return;
+
+      const ux = dx / dist, uy = dy / dist;
+
+      // Start from edge of node circle, end at edge of main circle
+      const x1 = nx + ux * (nr + 4);
+      const y1 = ny + uy * (nr + 4);
+      const x2 = mainCX - ux * (mainR + 2);
+      const y2 = mainCY - uy * (mainR + 2);
+
+      // Slight curve using quadratic bezier
+      const midX = (x1 + x2) / 2;
+      const midY = (y1 + y2) / 2;
+
+      svgHtml += `<line
+        x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}"
+        x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}"
+        stroke="${color}" stroke-width="1.5"
+        stroke-opacity="0.28" stroke-dasharray="5 4"/>`;
+
+      // Arrow tip at main circle end
+      const ax = x2 - ux * 6;
+      const ay = y2 - uy * 6;
+      const perpX = -uy * 4, perpY = ux * 4;
+      svgHtml += `<polygon
+        points="${x2.toFixed(1)},${y2.toFixed(1)} ${(ax+perpX).toFixed(1)},${(ay+perpY).toFixed(1)} ${(ax-perpX).toFixed(1)},${(ay-perpY).toFixed(1)}"
+        fill="${color}" opacity="0.35"/>`;
+    });
+
+    connSvg.innerHTML = svgHtml;
+  }
+
+  function resetTool() {
+    vals.actor = 5; vals.eval = 5; vals.sit = 5;
+    document.getElementById('problem').value      = '';
+    document.getElementById('circle-label').value = '';
+    document.getElementById('actor-notes').value  = '';
+    document.getElementById('eval-notes').value   = '';
+    document.getElementById('sit-notes').value    = '';
+    updateViz();
+  }
+
+  // Init
+  window.addEventListener('load', () => {
+    updateViz();
+    // Redraw connectors on resize
+    const ro = new ResizeObserver(() => requestAnimationFrame(drawConnectors));
+    ro.observe(document.getElementById('viz-stage'));
+  });
 </script>
 </body>
 </html>
