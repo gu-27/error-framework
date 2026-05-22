@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Error Framework — John Mittelstaedt, Gonzaga University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #041E42;
+    --red:    #C8102E;
+    --accent: #e8edf5;
+    --border: #dde3ec;
+    --muted:  #6b7a8d;
+    --actor-color: #041E42;
+    --eval-color: #C8102E;
+    --sit-color: #8a9bb0;
+  }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    color: var(--navy);
+    background: #fff;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--navy);
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+  .nav-brand-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: .95rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: .02em;
+  }
+  .nav-brand-sub {
+    font-size: .52rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+    margin-top: 2px;
+  }
+  .nav-tag {
+    font-size: .72rem;
+    font-weight: 500;
+    color: rgba(255,255,255,.55);
+    letter-spacing: .04em;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    color: white;
+    padding: 5rem 2rem 4.5rem;
+    text-align: center;
+  }
+  .eyebrow {
+    font-size: .6rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: rgba(255,255,255,.75);
+  }
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 300;
+    color: rgba(255,255,255,.65);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ── SECTION WRAPPERS ── */
+  .section {
+    padding: 5rem 2rem;
+  }
+  .section.bg-accent { background: var(--accent); }
+  .section.bg-white  { background: #fff; }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: .6rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: .6rem;
+  }
+  .section-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--navy);
+    line-height: 1.25;
+  }
+  .section-intro {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 680px;
+    margin-bottom: 3rem;
+  }
+
+  /* ── CONCEPT BLOCKS ── */
+  .concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .concept-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .concept-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+  .concept-card.actor::before   { background: var(--actor-color); }
+  .concept-card.evaluator::before { background: var(--eval-color); }
+  .concept-card.situational::before { background: var(--sit-color); }
+  .concept-card.overview::before { background: linear-gradient(90deg, var(--actor-color), var(--eval-color), var(--sit-color)); }
+  .concept-card.insight::before  { background: linear-gradient(90deg, var(--eval-color), var(--actor-color)); }
+
+  .concept-tag {
+    display: inline-block;
+    font-size: .55rem;
+    font-weight: 700;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    padding: .25rem .65rem;
+    border-radius: 20px;
+    margin-bottom: .85rem;
+  }
+  .concept-card.actor   .concept-tag { background: rgba(4,30,66,.1);  color: var(--actor-color); }
+  .concept-card.evaluator .concept-tag { background: rgba(200,16,46,.1); color: var(--eval-color); }
+  .concept-card.situational .concept-tag { background: rgba(138,155,176,.15); color: #5a6e82; }
+  .concept-card.overview .concept-tag, .concept-card.insight .concept-tag { background: var(--accent); color: var(--navy); }
+
+  .concept-card h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: .6rem;
+    color: var(--navy);
+  }
+  .concept-card p {
+    font-size: .92rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── INTERACTIVE TOOL ── */
+  .tool-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  @media (max-width: 720px) {
+    .tool-layout { grid-template-columns: 1fr; }
+  }
+
+  .tool-left {}
+  .tool-right {
+    position: sticky;
+    top: 84px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .problem-label {
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: .5rem;
+  }
+  textarea.problem-input {
+    width: 100%;
+    min-height: 100px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: .9rem 1rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: .95rem;
+    color: var(--navy);
+    resize: vertical;
+    outline: none;
+    transition: border-color .2s;
+    margin-bottom: 1.75rem;
+    background: white;
+  }
+  textarea.problem-input:focus { border-color: var(--navy); }
+  textarea.problem-input::placeholder { color: var(--muted); font-style: italic; }
+
+  /* ── ERROR PANELS ── */
+  .error-panel {
+    border-radius: 12px;
+    border: 1.5px solid var(--border);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    background: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .error-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 5px;
+    height: 100%;
+    border-radius: 12px 0 0 12px;
+  }
+  .error-panel.actor::before    { background: var(--actor-color); }
+  .error-panel.evaluator::before { background: var(--eval-color); }
+  .error-panel.situational::before { background: var(--sit-color); }
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin-bottom: .5rem;
+  }
+  .panel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .actor .panel-dot    { background: var(--actor-color); }
+  .evaluator .panel-dot { background: var(--eval-color); }
+  .situational .panel-dot { background: var(--sit-color); }
+
+  .panel-name {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+  .panel-desc {
+    font-size: .82rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    line-height: 1.55;
+  }
+  textarea.panel-notes {
+    width: 100%;
+    min-height: 72px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: .65rem .8rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: .88rem;
+    color: var(--navy);
+    resize: vertical;
+    outline: none;
+    transition: border-color .2s;
+    margin-bottom: 1rem;
+    background: #fafbfd;
+  }
+  textarea.panel-notes:focus { border-color: var(--border); background: white; }
+  textarea.panel-notes::placeholder { color: #aab3c0; font-style: italic; }
+
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+  }
+  .slider-label {
+    font-size: .7rem;
+    font-weight: 600;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 1;
+    height: 5px;
+    border-radius: 4px;
+    background: var(--border);
+    outline: none;
+    cursor: pointer;
+  }
+  .actor-panel input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--actor-color);
+    cursor: pointer;
+  }
+  .evaluator-panel input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--eval-color);
+    cursor: pointer;
+  }
+  .situational-panel input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--sit-color);
+    cursor: pointer;
+  }
+  .slider-val {
+    font-size: .85rem;
+    font-weight: 700;
+    min-width: 1.5rem;
+    text-align: center;
+  }
+  .actor-panel    .slider-val { color: var(--actor-color); }
+  .evaluator-panel .slider-val { color: var(--eval-color); }
+  .situational-panel .slider-val { color: var(--sit-color); }
+
+  /* ── SVG RINGS ── */
+  .ring-wrap {
+    width: 100%;
+    max-width: 320px;
+  }
+  .ring-wrap svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .ring-legend {
+    display: flex;
+    flex-direction: column;
+    gap: .45rem;
+    width: 100%;
+    max-width: 320px;
+  }
+  .legend-row {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    font-size: .8rem;
+    color: var(--muted);
+  }
+  .legend-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .legend-dot.actor    { background: var(--actor-color); }
+  .legend-dot.evaluator { background: var(--eval-color); }
+  .legend-dot.situational { background: var(--sit-color); }
+  .legend-row strong { font-weight: 600; color: var(--navy); }
+
+  .ring-summary {
+    font-size: .82rem;
+    color: var(--muted);
+    text-align: center;
+    max-width: 280px;
+    line-height: 1.5;
+    font-style: italic;
+  }
+  .ring-empty-hint {
+    font-size: .8rem;
+    color: #bbb;
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* ── RESET BUTTON ── */
+  .reset-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .65rem 1.5rem;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: white;
+    font-family: 'Outfit', sans-serif;
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    transition: border-color .2s, color .2s, background .2s;
+  }
+  .reset-btn:hover { border-color: var(--navy); color: var(--navy); background: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,.45);
+    text-align: center;
+    padding: 2rem;
+    font-size: .8rem;
+    font-weight: 400;
+    letter-spacing: .02em;
+  }
+  footer strong { color: rgba(255,255,255,.75); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <span class="nav-brand-name">The Error Framework</span>
+    <span class="nav-brand-sub">Gonzaga University</span>
+  </div>
+  <span class="nav-tag">John Mittelstaedt</span>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="eyebrow">A Decision Diagnostic Tool</p>
+  <h1>Where Did the<br><em>Decision Go Wrong?</em></h1>
+  <p class="hero-sub">Errors in judgment rarely have a single source. The Error Framework helps you trace a decision back to its root — actor, evaluator, or situation.</p>
+</header>
+
+<!-- SECTION 1 — EXPLANATION -->
+<section class="section bg-accent">
+  <div class="container">
+    <p class="section-label">The Framework</p>
+    <h2 class="section-title">Three Sources of Error</h2>
+    <p class="section-intro">Every flawed decision can be examined through three distinct lenses. Understanding which type of error dominated helps you know what to fix — and what to forgive.</p>
+
+    <div class="concept-grid">
+
+      <!-- Overview -->
+      <div class="concept-card overview" style="grid-column: 1 / -1;">
+        <span class="concept-tag">Overview</span>
+        <h3>Why Errors Are Worth Classifying</h3>
+        <p>Not all mistakes are created equal. Some errors stem from the person making the decision — their knowledge, biases, or intentions. Others emerge from the systems used to evaluate that decision. Still others are products of forces entirely outside anyone's control. Without a framework, we tend to blame the nearest person. With one, we can act more precisely.</p>
+      </div>
+
+      <!-- Actor Error -->
+      <div class="concept-card actor">
+        <span class="concept-tag">Actor Error</span>
+        <h3>The Decision-Maker's Contribution</h3>
+        <p>Actor errors arise from the individual at the center of the decision. This includes cognitive shortcuts, limited expertise, conflicting incentives, or deliberate choice. The actor is who we most naturally assign blame to — but only one type of error is fully theirs.</p>
+      </div>
+
+      <!-- Evaluator Error -->
+      <div class="concept-card evaluator">
+        <span class="concept-tag">Evaluator Error</span>
+        <h3>The System's Role in Judgment</h3>
+        <p>Evaluator errors occur in how a decision is assessed — not in the decision itself. Flawed metrics, biased reviewers, inconsistent criteria, or misaligned incentive structures all produce evaluator error. The decision may have been reasonable; the evaluation was not.</p>
+      </div>
+
+      <!-- Situational Error -->
+      <div class="concept-card situational">
+        <span class="concept-tag">Situational Error</span>
+        <h3>Context Beyond Anyone's Control</h3>
+        <p>Situational errors emerge from the environment surrounding a decision — timing, information availability, resource constraints, or unpredictable external events. Even ideal actors in well-designed systems can produce poor outcomes when the situation itself is hostile to good decisions.</p>
+      </div>
+
+      <!-- Insight -->
+      <div class="concept-card insight" style="grid-column: 1 / -1;">
+        <span class="concept-tag">Key Insight</span>
+        <h3>Most Real Errors Are Mixed</h3>
+        <p>In practice, bad outcomes reflect all three error types in varying proportions. The framework is most powerful not as a blame-assignment tool, but as a diagnostic one. By distributing responsibility across actor, evaluator, and situation, you surface what actually needs to change — training, systems redesign, or environmental support — rather than simply finding someone to hold accountable.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2 — INTERACTIVE TOOL -->
+<section class="section bg-white">
+  <div class="container">
+    <p class="section-label">Interactive Tool</p>
+    <h2 class="section-title">Analyze a Decision</h2>
+    <p class="section-intro">Describe a decision or outcome below, then rate the contribution of each error type. The visualization will update as you adjust the sliders.</p>
+
+    <div class="tool-layout">
+
+      <!-- LEFT: inputs -->
+      <div class="tool-left">
+
+        <!-- Problem statement -->
+        <p class="problem-label">Describe the decision or outcome</p>
+        <textarea class="problem-input" id="problem" placeholder="Briefly describe the decision, outcome, or situation you want to analyze…"></textarea>
+
+        <!-- Actor Panel -->
+        <div class="error-panel actor actor-panel">
+          <div class="panel-header">
+            <div class="panel-dot"></div>
+            <span class="panel-name">Actor Error</span>
+          </div>
+          <p class="panel-desc">How much did the decision-maker's own choices, knowledge gaps, biases, or intentions contribute to this outcome?</p>
+          <textarea class="panel-notes" id="actor-notes" placeholder="Notes on actor-level factors…"></textarea>
+          <div class="slider-row">
+            <span class="slider-label">Contribution</span>
+            <input type="range" id="actor-slider" min="0" max="10" value="5" oninput="updateViz()">
+            <span class="slider-val" id="actor-val">5</span>
+          </div>
+        </div>
+
+        <!-- Evaluator Panel -->
+        <div class="error-panel evaluator evaluator-panel">
+          <div class="panel-header">
+            <div class="panel-dot"></div>
+            <span class="panel-name">Evaluator Error</span>
+          </div>
+          <p class="panel-desc">How much did flawed measurement, biased review processes, or misaligned evaluation criteria contribute?</p>
+          <textarea class="panel-notes" id="eval-notes" placeholder="Notes on evaluator-level factors…"></textarea>
+          <div class="slider-row">
+            <span class="slider-label">Contribution</span>
+            <input type="range" id="eval-slider" min="0" max="10" value="5" oninput="updateViz()">
+            <span class="slider-val" id="eval-val">5</span>
+          </div>
+        </div>
+
+        <!-- Situational Panel -->
+        <div class="error-panel situational situational-panel">
+          <div class="panel-header">
+            <div class="panel-dot"></div>
+            <span class="panel-name">Situational Error</span>
+          </div>
+          <p class="panel-desc">How much did external constraints, timing, limited information, or environmental factors outside anyone's control contribute?</p>
+          <textarea class="panel-notes" id="sit-notes" placeholder="Notes on situational factors…"></textarea>
+          <div class="slider-row">
+            <span class="slider-label">Contribution</span>
+            <input type="range" id="sit-slider" min="0" max="10" value="5" oninput="updateViz()">
+            <span class="slider-val" id="sit-val">5</span>
+          </div>
+        </div>
+
+        <!-- Reset -->
+        <button class="reset-btn" onclick="resetTool()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          Reset
+        </button>
+
+      </div><!-- /tool-left -->
+
+      <!-- RIGHT: visualization -->
+      <div class="tool-right">
+
+        <div class="ring-wrap">
+          <svg id="ring-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- Rings drawn by JS -->
+          </svg>
+        </div>
+
+        <div class="ring-legend">
+          <div class="legend-row">
+            <div class="legend-dot actor"></div>
+            <span><strong>Actor</strong> — innermost ring</span>
+          </div>
+          <div class="legend-row">
+            <div class="legend-dot evaluator"></div>
+            <span><strong>Evaluator</strong> — middle ring</span>
+          </div>
+          <div class="legend-row">
+            <div class="legend-dot situational"></div>
+            <span><strong>Situational</strong> — outer ring</span>
+          </div>
+        </div>
+
+        <p class="ring-summary" id="ring-summary"></p>
+
+      </div><!-- /tool-right -->
+
+    </div><!-- /tool-layout -->
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>The Error Framework</strong> — John Mittelstaedt, Gonzaga University</p>
+  <p style="margin-top:.4rem;">Nothing entered here is stored or saved.</p>
+</footer>
+
+<script>
+  const CX = 150, CY = 150, MAX_R = 130, MIN_R = 10;
+
+  // Area-proportional radius: r = sqrt(area / π), scale areas by value
+  function areaRadius(val, maxVal) {
+    if (maxVal === 0) return MIN_R;
+    const frac = val / maxVal;
+    return Math.max(MIN_R, Math.sqrt(frac) * MAX_R);
+  }
+
+  function updateViz() {
+    const aVal = +document.getElementById('actor-slider').value;
+    const eVal = +document.getElementById('eval-slider').value;
+    const sVal = +document.getElementById('sit-slider').value;
+
+    document.getElementById('actor-val').textContent = aVal;
+    document.getElementById('eval-val').textContent   = eVal;
+    document.getElementById('sit-val').textContent    = sVal;
+
+    const maxVal = Math.max(aVal, eVal, sVal, 1);
+
+    // Radii: area proportional
+    // Outer (Situational) radius relative to its own value at max
+    // Each ring radius is independent — they're concentric, not stacked
+    // Outermost (situational) is largest possible, innermost (actor) is smallest
+    // We scale each to its proportion of the max value, but maintain the visual nesting
+    // by ensuring outer >= middle >= inner spacing-wise.
+    // Approach: allocate radii in layers — situational uses full range, evaluator uses 75%, actor uses 50%
+    const rSit = areaRadius(sVal, maxVal) * 1.0;
+    const rEval = areaRadius(eVal, maxVal) * 0.72;
+    const rAct  = areaRadius(aVal, maxVal) * 0.45;
+
+    const svg = document.getElementById('ring-svg');
+    svg.innerHTML = `
+      <!-- Background circle -->
+      <circle cx="${CX}" cy="${CY}" r="${MAX_R}" fill="none" stroke="#edf0f5" stroke-width="1"/>
+
+      <!-- Situational ring (outermost) -->
+      <circle cx="${CX}" cy="${CY}" r="${rSit.toFixed(1)}"
+        fill="${sVal === 0 ? 'none' : 'rgba(138,155,176,.18)'}"
+        stroke="${sVal === 0 ? '#dde3ec' : 'var(--sit-color)'}"
+        stroke-width="${sVal === 0 ? '1' : '2'}"
+        stroke-dasharray="${sVal === 0 ? '4 4' : 'none'}"
+      />
+
+      <!-- Evaluator ring (middle) -->
+      <circle cx="${CX}" cy="${CY}" r="${rEval.toFixed(1)}"
+        fill="${eVal === 0 ? 'none' : 'rgba(200,16,46,.12)'}"
+        stroke="${eVal === 0 ? '#dde3ec' : 'var(--eval-color)'}"
+        stroke-width="${eVal === 0 ? '1' : '2'}"
+        stroke-dasharray="${eVal === 0 ? '4 4' : 'none'}"
+      />
+
+      <!-- Actor ring (innermost) -->
+      <circle cx="${CX}" cy="${CY}" r="${rAct.toFixed(1)}"
+        fill="${aVal === 0 ? 'none' : 'rgba(4,30,66,.18)'}"
+        stroke="${aVal === 0 ? '#dde3ec' : 'var(--actor-color)'}"
+        stroke-width="${aVal === 0 ? '1' : '2.5'}"
+        stroke-dasharray="${aVal === 0 ? '4 4' : 'none'}"
+      />
+
+      <!-- Value labels -->
+      ${sVal > 0 ? `<text x="${CX}" y="${CY - rSit - 7}" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="600" fill="var(--sit-color)">${sVal}</text>` : ''}
+      ${eVal > 0 ? `<text x="${CX}" y="${CY - rEval - 7}" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="600" fill="var(--eval-color)">${eVal}</text>` : ''}
+      ${aVal > 0 ? `<text x="${CX}" y="${CY - rAct - 7}" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="600" fill="var(--actor-color)">${aVal}</text>` : ''}
+    `;
+
+    updateSummary(aVal, eVal, sVal);
+  }
+
+  function updateSummary(a, e, s) {
+    const el = document.getElementById('ring-summary');
+    const total = a + e + s;
+    if (total === 0) { el.textContent = ''; return; }
+
+    const dominant = (a >= e && a >= s) ? 'Actor'
+                   : (e >= a && e >= s) ? 'Evaluator'
+                   : 'Situational';
+
+    const ap = Math.round(a / total * 100);
+    const ep = Math.round(e / total * 100);
+    const sp = Math.round(s / total * 100);
+
+    el.textContent = `${dominant} error dominates. Actor ${ap}% · Evaluator ${ep}% · Situational ${sp}%`;
+  }
+
+  function resetTool() {
+    document.getElementById('problem').value    = '';
+    document.getElementById('actor-notes').value = '';
+    document.getElementById('eval-notes').value  = '';
+    document.getElementById('sit-notes').value   = '';
+    ['actor','eval','sit'].forEach(id => {
+      document.getElementById(id + '-slider').value = 5;
+    });
+    updateViz();
+  }
+
+  // Initial render
+  updateViz();
+</script>
+</body>
+</html>
