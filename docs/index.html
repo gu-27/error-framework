@@ -56,25 +56,25 @@
     background: var(--navy); color: white;
     padding: 5rem 2rem 4.5rem; text-align: center;
   }
-  .eyebrow {
-    font-size: .6rem; font-weight: 700; letter-spacing: .15em;
-    text-transform: uppercase; color: var(--red); margin-bottom: 1rem;
-  }
   .hero h1 {
     font-family: 'Libre Baskerville', serif;
     font-size: clamp(2.4rem, 5vw, 4rem);
     font-weight: 700; line-height: 1.15; margin-bottom: 1.25rem;
   }
-  .hero h1 em { font-style: italic; color: rgba(255,255,255,.75); }
   .hero-sub {
     font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 300;
-    color: rgba(255,255,255,.65); max-width: 600px; margin: 0 auto;
+    color: rgba(255,255,255,.65); max-width: 580px; margin: 0 auto 1.25rem;
+  }
+  .hero-byline {
+    font-size: .72rem; font-weight: 500; letter-spacing: .06em;
+    color: rgba(255,255,255,.38);
   }
 
   /* ── SECTIONS ── */
   .section { padding: 5rem 2rem; }
   .section.bg-accent { background: var(--accent); }
   .section.bg-white  { background: #fff; }
+  .section.bg-tool   { background: #f0f3f8; border-top: 1px solid var(--border); }
   .container { max-width: 1000px; margin: 0 auto; }
 
   .section-label {
@@ -90,42 +90,113 @@
     font-size: 1.05rem; color: var(--muted); max-width: 680px; margin-bottom: 3rem;
   }
 
-  /* ── CONCEPT CARDS ── */
-  .concept-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+  /* ── EXPLANATION PROSE BLOCKS ── */
+  .explain-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 740px;
   }
-  .concept-card {
-    background: white; border: 1px solid var(--border);
-    border-radius: 14px; padding: 1.75rem;
-    position: relative; overflow: hidden;
-  }
-  .concept-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-  }
-  .concept-card.actor::before       { background: var(--actor-color); }
-  .concept-card.evaluator::before   { background: var(--eval-color); }
-  .concept-card.situational::before { background: var(--sit-color); }
-  .concept-card.overview::before    { background: linear-gradient(90deg, var(--actor-color), var(--eval-color), var(--sit-color)); }
-  .concept-card.insight::before     { background: linear-gradient(90deg, var(--eval-color), var(--actor-color)); }
 
-  .concept-tag {
-    display: inline-block; font-size: .55rem; font-weight: 700;
-    letter-spacing: .13em; text-transform: uppercase;
-    padding: .25rem .65rem; border-radius: 20px; margin-bottom: .85rem;
+  .prose-block {
+    padding: 2.25rem 0;
+    border-bottom: 1px solid var(--border);
   }
-  .concept-card.actor       .concept-tag { background: rgba(4,30,66,.1);    color: var(--actor-color); }
-  .concept-card.evaluator   .concept-tag { background: rgba(200,16,46,.1);  color: var(--eval-color); }
-  .concept-card.situational .concept-tag { background: rgba(122,143,166,.15); color: #4a6070; }
-  .concept-card.overview    .concept-tag,
-  .concept-card.insight     .concept-tag { background: var(--accent); color: var(--navy); }
+  .prose-block:last-child { border-bottom: none; }
 
-  .concept-card h3 {
+  .prose-block .block-label {
+    font-size: .58rem; font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--red);
+    display: block; margin-bottom: .55rem;
+  }
+  .prose-block h3 {
     font-family: 'Libre Baskerville', serif;
-    font-size: 1.1rem; font-weight: 700; margin-bottom: .6rem; color: var(--navy);
+    font-size: 1.18rem; font-weight: 700; color: var(--navy);
+    margin-bottom: .75rem; line-height: 1.3;
   }
-  .concept-card p { font-size: .92rem; color: var(--muted); line-height: 1.65; }
+  .prose-block p {
+    font-size: .97rem; color: var(--muted); line-height: 1.75;
+  }
+  .prose-block p + p { margin-top: .75rem; }
+
+  /* Three error sources grid */
+  .error-sources-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  @media (max-width: 680px) {
+    .error-sources-grid { grid-template-columns: 1fr; }
+  }
+
+  .error-source-card {
+    border-radius: 12px;
+    padding: 1.4rem 1.3rem;
+    border: 1px solid var(--border);
+    background: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .error-source-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .error-source-card.evaluator::before { background: var(--eval-color); }
+  .error-source-card.situational::before { background: var(--sit-color); }
+  .error-source-card.actor::before { background: var(--actor-color); }
+
+  .error-source-card .src-tag {
+    font-size: .55rem; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; display: block; margin-bottom: .45rem;
+  }
+  .evaluator   .src-tag { color: var(--eval-color); }
+  .situational .src-tag { color: #4a6070; }
+  .actor       .src-tag { color: var(--actor-color); }
+
+  .error-source-card h4 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: .95rem; font-weight: 700; color: var(--navy);
+    margin-bottom: .5rem; line-height: 1.3;
+  }
+  .error-source-card p {
+    font-size: .84rem; color: var(--muted); line-height: 1.65;
+  }
+
+  /* Example callout */
+  .example-callout {
+    background: white;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--navy);
+    border-radius: 0 10px 10px 0;
+    padding: 1.5rem 1.75rem;
+    margin-top: 1.25rem;
+  }
+  .example-callout .ex-label {
+    font-size: .58rem; font-weight: 700; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--navy);
+    display: block; margin-bottom: .6rem;
+  }
+  .example-callout p {
+    font-size: .92rem; color: var(--muted); line-height: 1.7;
+  }
+  .example-callout p + p { margin-top: .6rem; }
+
+  /* Starting move highlight */
+  .starting-move {
+    background: rgba(200,16,46,.04);
+    border: 1px solid rgba(200,16,46,.15);
+    border-radius: 10px;
+    padding: 1.1rem 1.4rem;
+    margin-top: 1.25rem;
+    font-size: .92rem; color: var(--muted); line-height: 1.7;
+  }
+  .starting-move strong { color: var(--red); font-weight: 600; }
+
+  /* Tool note */
+  .tool-note {
+    font-size: .88rem; color: #8a96a3; line-height: 1.7;
+    font-style: italic;
+  }
 
   /* ── PROBLEM INPUT ── */
   .problem-label {
@@ -357,8 +428,9 @@
     font-family: 'Outfit', sans-serif; font-size: .85rem;
     font-weight: 600; color: var(--muted); cursor: pointer;
     transition: border-color .2s, color .2s, background .2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
   }
-  .reset-btn:hover { border-color: var(--navy); color: var(--navy); background: var(--accent); }
+  .reset-btn:hover { border-color: var(--navy); color: var(--navy); background: #fff; }
 
   /* ── FOOTER ── */
   footer {
@@ -392,58 +464,103 @@
 
 <!-- HERO -->
 <header class="hero">
-  <p class="eyebrow">A Decision Diagnostic Tool</p>
-  <h1>Where Did the<br><em>Decision Go Wrong?</em></h1>
-  <p class="hero-sub">Errors in judgment rarely have a single source. The Error Framework helps you trace a decision back to its root — actor, evaluator, or situation.</p>
+  <h1>The Error Framework</h1>
+  <p class="hero-sub">A tool for understanding problems, owning growth, and having better conversations.</p>
+  <p class="hero-byline">John Mittelstaedt &middot; Gonzaga University</p>
 </header>
 
 <!-- SECTION 1 — EXPLANATION -->
-<section class="section bg-accent">
+<section class="section bg-white">
   <div class="container">
     <p class="section-label">The Framework</p>
-    <h2 class="section-title">Three Sources of Error</h2>
-    <p class="section-intro">Every flawed decision can be examined through three distinct lenses. Understanding which type of error dominated helps you know what to fix — and what to forgive.</p>
+    <h2 class="section-title">Understanding The Error Framework</h2>
 
-    <div class="concept-grid">
-      <div class="concept-card overview" style="grid-column: 1 / -1;">
-        <span class="concept-tag">Overview</span>
-        <h3>Why Errors Are Worth Classifying</h3>
-        <p>Not all mistakes are created equal. Some errors stem from the person making the decision — their knowledge, biases, or intentions. Others emerge from the systems used to evaluate that decision. Still others are products of forces entirely outside anyone's control. Without a framework, we tend to blame the nearest person. With one, we can act more precisely.</p>
+    <div class="explain-stack">
+
+      <!-- Block 1: Why Error? -->
+      <div class="prose-block">
+        <span class="block-label">Why Error?</span>
+        <h3>Error Language Enables Learning. Failure Language Shuts It Down.</h3>
+        <p>Most people frame problems as failures. Failure language triggers shame, defensiveness, and blame — it shuts down learning and growth. Error language comes from research, engineering, and computer science, where error is expected, measurable, and fixable. In signal processing, error is noise in the system you work to minimize. In software, an error is something you debug and iterate on.</p>
+        <p>The Error Framework borrows this mindset: every problem or negative outcome has contributing error sources. When we name them precisely, we can address them. When we own them honestly, we grow.</p>
       </div>
-      <div class="concept-card actor">
-        <span class="concept-tag">Actor Error</span>
-        <h3>The Decision-Maker's Contribution</h3>
-        <p>Actor errors arise from the individual at the center of the decision. This includes cognitive shortcuts, limited expertise, conflicting incentives, or deliberate choice. The actor is who we most naturally assign blame to — but only one type of error is fully theirs.</p>
+
+      <!-- Block 2: The Formative Construct -->
+      <div class="prose-block">
+        <span class="block-label">The Formative Construct</span>
+        <h3>Problems Are Formed by Multiple Sources — Not Caused by One.</h3>
+        <p>In research methodology, a formative construct is built from its contributing dimensions — the factors don't just measure the construct, they form it. The Error Framework applies this same logic to real-world problems. A negative outcome is not caused by one thing — it is formed by multiple error sources working together.</p>
+        <p>This matters because it means no single party fully owns the problem. That is not an excuse. It is precision. And precision is what makes growth conversations possible instead of defensive ones.</p>
       </div>
-      <div class="concept-card evaluator">
-        <span class="concept-tag">Evaluator Error</span>
-        <h3>The System's Role in Judgment</h3>
-        <p>Evaluator errors occur in how a decision is assessed — not in the decision itself. Flawed metrics, biased reviewers, inconsistent criteria, or misaligned incentive structures all produce evaluator error. The decision may have been reasonable; the evaluation was not.</p>
+
+      <!-- Block 3: The Three Error Sources -->
+      <div class="prose-block">
+        <span class="block-label">The Three Error Sources</span>
+        <h3>Every Problem Has Three Contributing Dimensions.</h3>
+
+        <div class="error-sources-grid">
+          <div class="error-source-card evaluator">
+            <span class="src-tag">Evaluator Error</span>
+            <h4>The Assessor's Limitations</h4>
+            <p>The person assessing the situation brings their own limitations: bias, incomplete context, preconceived ideas, or lack of experience in the specific domain. Evaluator error does not mean the evaluator is wrong — it means their perspective is shaped by their own constraints, and naming that creates space for honesty.</p>
+          </div>
+          <div class="error-source-card situational">
+            <span class="src-tag">Situational Error</span>
+            <h4>Factors Outside Anyone's Control</h4>
+            <p>Time pressure, resource constraints, environmental conditions, organizational dynamics, external events. Even in an ideal scenario with capable, well-intentioned people, situations create error. Naming situational factors is not excuse-making — it is context that belongs in the picture.</p>
+          </div>
+          <div class="error-source-card actor">
+            <span class="src-tag">Actor Error</span>
+            <h4>The Individual's Contribution</h4>
+            <p>The person most directly connected to the outcome has their own contributing error: skill gaps, distraction, poor time management, inexperience, disengagement. This is the error most directly tied to individual growth. It does not define the person — it defines what can be improved.</p>
+          </div>
+        </div>
       </div>
-      <div class="concept-card situational">
-        <span class="concept-tag">Situational Error</span>
-        <h3>Context Beyond Anyone's Control</h3>
-        <p>Situational errors emerge from the environment surrounding a decision — timing, information availability, resource constraints, or unpredictable external events. Even ideal actors in well-designed systems can produce poor outcomes when the situation itself is hostile to good decisions.</p>
+
+      <!-- Block 4: A Concrete Example -->
+      <div class="prose-block">
+        <span class="block-label">A Concrete Example</span>
+        <h3>The Missed Deadline.</h3>
+        <p>A student misses a project deadline. At first glance, the story is simple — the student didn't turn it in. But the full picture is more precise.</p>
+        <div class="example-callout">
+          <span class="ex-label">Breaking It Down</span>
+          <p><strong style="color:var(--actor-color);">Actor error:</strong> poor time management and underestimating the scope of the work.</p>
+          <p><strong style="color:var(--sit-color);">Situational error:</strong> a family emergency during the final week.</p>
+          <p><strong style="color:var(--eval-color);">Evaluator error:</strong> unclear expectations set at the start of the assignment.</p>
+        </div>
+        <p style="margin-top:1rem;">All three contributed to the outcome. The student still owns their actor error — but the full picture matters for an honest conversation about what actually needs to change.</p>
       </div>
-      <div class="concept-card insight" style="grid-column: 1 / -1;">
-        <span class="concept-tag">Key Insight</span>
-        <h3>Most Real Errors Are Mixed</h3>
-        <p>In practice, bad outcomes reflect all three error types in varying proportions. The framework is most powerful not as a blame-assignment tool, but as a diagnostic one. By distributing responsibility across actor, evaluator, and situation, you surface what actually needs to change — training, systems redesign, or environmental support — rather than simply finding someone to hold accountable.</p>
+
+      <!-- Block 5: How to Use It -->
+      <div class="prose-block">
+        <span class="block-label">How to Use It</span>
+        <h3>A Collaborative Conversation Tool.</h3>
+        <p>Start by naming the problem or negative outcome clearly. Then work through each error source together — what evaluator limitations were present? What situational factors played a role? What actor behaviors contributed? Use the tool below to assign a rough weight to each source. The visualization updates in real time to show how each error source shapes the whole.</p>
+        <div class="starting-move">
+          <strong>A recommended starting move:</strong> begin with evaluator error. When the person running the conversation names their own limitations first, it lowers defensiveness and models the kind of honest ownership the conversation is asking for.
+        </div>
       </div>
+
+      <!-- Block 6: Note on the Tool -->
+      <div class="prose-block">
+        <span class="block-label">Note on the Tool</span>
+        <p class="tool-note">Nothing entered below is saved or stored. This is a thinking and conversation aid — use it live with a colleague, manager, or student, or use it alone to reflect on a situation. The goal is not to minimize accountability. It is to locate it precisely, own it honestly, and focus growth where it actually lives.</p>
+      </div>
+
     </div>
   </div>
 </section>
 
 <!-- SECTION 2 — INTERACTIVE TOOL -->
-<section class="section bg-white">
+<section class="section bg-tool">
   <div class="container">
     <p class="section-label">Interactive Tool</p>
-    <h2 class="section-title">Analyze a Decision</h2>
-    <p class="section-intro">Describe a decision or outcome, then use the + / − buttons to rate each error type's contribution. The circle updates proportionally as you adjust the weights.</p>
+    <h2 class="section-title">Analyze a Problem or Outcome</h2>
+    <p class="section-intro">Name the problem below, then use + / − to weight each error source. The circle updates proportionally as you adjust the values.</p>
 
     <!-- Problem statement -->
-    <p class="problem-label">Describe the decision or outcome</p>
-    <textarea class="problem-input" id="problem" placeholder="Briefly describe the decision, outcome, or situation you want to analyze…"></textarea>
+    <p class="problem-label">Describe the problem or outcome</p>
+    <textarea class="problem-input" id="problem" placeholder="Briefly describe the situation you want to analyze…"></textarea>
 
     <!-- Viz stage -->
     <div class="viz-stage" id="viz-stage">
