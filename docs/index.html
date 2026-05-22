@@ -76,7 +76,7 @@
   .section.bg-white  { background: #fff; }
   .section.bg-tool   { background: #f0f3f8; border-top: 1px solid var(--border); }
   .container { max-width: 1000px; margin: 0 auto; }
-  .container--wide { max-width: 1240px; }
+  .container--wide { max-width: 1440px; }
 
   .section-label {
     font-size: .6rem; font-weight: 700; letter-spacing: .15em;
@@ -219,8 +219,8 @@
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     grid-template-rows: auto auto;
-    column-gap: 1.5rem;
-    row-gap: 2.5rem;
+    column-gap: 2rem;
+    row-gap: 3rem;
     position: relative;
     align-items: center;
     justify-items: stretch;
@@ -252,7 +252,7 @@
     justify-self: center;
   }
   #node-sit .node-card {
-    width: 300px;
+    width: 460px;
     text-align: left;
   }
 
@@ -275,13 +275,16 @@
   /* Cards */
   .node-card {
     flex: 1;
-    min-width: 220px;
+    min-width: 260px;
+    min-height: 220px;
     background: white;
     border: 1.5px solid var(--border);
-    border-radius: 12px;
-    padding: 1.1rem 1.25rem 1rem;
+    border-radius: 14px;
+    padding: 1.4rem 1.5rem 1.25rem;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
   .node-card::before {
     content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 4px;
@@ -433,7 +436,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: .45rem;
-    min-height: 52px;
+    flex: 1;
+    min-height: 160px;
     padding: .5rem 0 .65rem;
     align-content: flex-start;
   }
