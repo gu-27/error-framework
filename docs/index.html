@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Error Framework — John Mittelstaedt, Gonzaga University</title>
+<title>The Error Framework — John Correia, Gonzaga University</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -265,32 +265,22 @@
   .situational .node-card::before { background: var(--sit-color); }
 
   .node-card-tag {
-    display: block; font-size: .52rem; font-weight: 700; letter-spacing: .14em;
-    text-transform: uppercase; margin-bottom: .25rem; padding-left: .1rem;
+    display: block; font-size: .6rem; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; margin-bottom: .6rem; padding-left: .1rem;
   }
   .actor       .node-card-tag { color: var(--actor-color); }
   .evaluator   .node-card-tag { color: var(--eval-color); }
   .situational .node-card-tag { color: #4a6070; }
-
-  .node-card h4 {
-    font-family: 'Libre Baskerville', serif;
-    font-size: .88rem; font-weight: 700; color: var(--navy);
-    margin-bottom: .3rem; padding-left: .1rem;
-  }
-  .node-card .card-desc {
-    font-size: .78rem; color: var(--muted); line-height: 1.5;
-    margin-bottom: .7rem; padding-left: .1rem;
-  }
   .node-card textarea {
-    width: 100%; min-height: 52px;
+    width: 100%; min-height: 68px;
     border: 1px solid var(--border); border-radius: 7px;
-    padding: .45rem .6rem; font-family: 'Outfit', sans-serif;
-    font-size: .78rem; color: var(--navy); resize: none;
+    padding: .55rem .7rem; font-family: 'Outfit', sans-serif;
+    font-size: .8rem; color: var(--navy); resize: none;
     outline: none; background: #fafbfd; transition: border-color .2s;
     display: block;
   }
   .node-card textarea:focus { border-color: #aab3c0; background: white; }
-  .node-card textarea::placeholder { color: #bbb; font-style: italic; }
+  .node-card textarea::placeholder { color: #c2c9d2; font-style: normal; }
 
   /* Node circles */
   .node-circle {
@@ -459,14 +449,14 @@
     <span class="nav-brand-name">The Error Framework</span>
     <span class="nav-brand-sub">Gonzaga University</span>
   </div>
-  <span class="nav-tag">John Mittelstaedt</span>
+  <span class="nav-tag">John Correia</span>
 </nav>
 
 <!-- HERO -->
 <header class="hero">
   <h1>The Error Framework</h1>
   <p class="hero-sub">A tool for understanding problems, owning growth, and having better conversations.</p>
-  <p class="hero-byline">John Mittelstaedt &middot; Gonzaga University</p>
+  <p class="hero-byline">John Correia &middot; Gonzaga University</p>
 </header>
 
 <!-- SECTION 1 — EXPLANATION -->
@@ -555,12 +545,12 @@
 <section class="section bg-tool">
   <div class="container">
     <p class="section-label">Interactive Tool</p>
-    <h2 class="section-title">Analyze a Problem or Outcome</h2>
+    <h2 class="section-title">Analyze a Problem or Negative Outcome</h2>
     <p class="section-intro">Name the problem below, then use + / − to weight each error source. The circle updates proportionally as you adjust the values.</p>
 
     <!-- Problem statement -->
-    <p class="problem-label">Describe the problem or outcome</p>
-    <textarea class="problem-input" id="problem" placeholder="Briefly describe the situation you want to analyze…"></textarea>
+    <p class="problem-label">Describe the problem or negative outcome</p>
+    <textarea class="problem-input" id="problem" placeholder="Briefly describe the problem or negative outcome you want to analyze…"></textarea>
 
     <!-- Viz stage -->
     <div class="viz-stage" id="viz-stage">
@@ -575,9 +565,7 @@
         <div class="node-group actor" id="node-actor">
           <div class="node-card">
             <span class="node-card-tag">Actor Error</span>
-            <h4>The Decision-Maker</h4>
-            <p class="card-desc">The person's own choices, knowledge gaps, cognitive shortcuts, or intentions.</p>
-            <textarea id="actor-notes" placeholder="Notes on actor-level factors…"></textarea>
+            <textarea id="actor-notes" placeholder="e.g. limited experience, poor time management, distraction, skill gaps..."></textarea>
           </div>
           <div class="node-circle" id="nc-actor">
             <span class="node-val" id="actor-val">5</span>
@@ -593,9 +581,7 @@
         <div class="node-group evaluator" id="node-eval">
           <div class="node-card">
             <span class="node-card-tag">Evaluator Error</span>
-            <h4>The Evaluation System</h4>
-            <p class="card-desc">Flawed metrics, biased review processes, or misaligned criteria used to assess the decision.</p>
-            <textarea id="eval-notes" placeholder="Notes on evaluator-level factors…"></textarea>
+            <textarea id="eval-notes" placeholder="e.g. incomplete context, bias, preconceived ideas, limited domain knowledge..."></textarea>
           </div>
           <div class="node-circle" id="nc-eval">
             <span class="node-val" id="eval-val">5</span>
@@ -611,9 +597,7 @@
         <div class="node-group situational" id="node-sit">
           <div class="node-card">
             <span class="node-card-tag">Situational Error</span>
-            <h4>The Environment</h4>
-            <p class="card-desc">External constraints, timing, limited information, or forces outside anyone's control.</p>
-            <textarea id="sit-notes" placeholder="Notes on situational factors…"></textarea>
+            <textarea id="sit-notes" placeholder="e.g. time pressure, resource constraints, external events, organizational dynamics..."></textarea>
           </div>
           <div class="node-circle" id="nc-sit">
             <span class="node-val" id="sit-val">5</span>
@@ -632,7 +616,7 @@
         <div class="main-circle-wrap">
           <svg id="main-svg" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg"></svg>
           <div class="circle-label-overlay">
-            <input type="text" id="circle-label" placeholder="Label this decision…" maxlength="60">
+            <input type="text" id="circle-label" placeholder="Label this problem…" maxlength="60">
           </div>
         </div>
 
@@ -660,7 +644,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <p><strong>The Error Framework</strong> — John Mittelstaedt, Gonzaga University</p>
+  <p><strong>The Error Framework</strong> — John Correia, Gonzaga University</p>
   <p style="margin-top:.4rem;">Nothing entered here is stored or saved.</p>
 </footer>
 
