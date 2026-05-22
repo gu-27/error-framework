@@ -213,13 +213,16 @@
   textarea.problem-input:focus { border-color: var(--navy); }
   textarea.problem-input::placeholder { color: var(--muted); font-style: italic; }
 
-  /* ── VIZ STAGE ── */
+  /* ── VIZ STAGE — 3-spoke grid ── */
   .viz-stage {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 1.5rem;
+    row-gap: 2.5rem;
     position: relative;
-    min-height: 460px;
+    align-items: center;
+    justify-items: stretch;
   }
 
   /* Connectors SVG overlay */
@@ -231,20 +234,41 @@
     overflow: visible;
   }
 
-  /* ── NODES COLUMN ── */
-  .nodes-col {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    flex-shrink: 0;
-    z-index: 1;
-    width: 340px;
-  }
-
+  /* ── NODE GROUPS — grid placement ── */
   .node-group {
     display: flex;
     align-items: center;
     gap: .85rem;
+    z-index: 1;
+  }
+
+  /* Situational — top center, card above circle */
+  #node-sit {
+    grid-column: 2;
+    grid-row: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+  }
+  #node-sit .node-card {
+    width: 300px;
+    text-align: left;
+  }
+
+  /* Actor — left, card left + circle right (circle faces center) */
+  #node-actor {
+    grid-column: 1;
+    grid-row: 2;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  /* Evaluator — right, circle left (faces center) + card right */
+  #node-eval {
+    grid-column: 3;
+    grid-row: 2;
+    flex-direction: row;
+    justify-content: flex-start;
   }
 
   /* Cards */
@@ -272,10 +296,10 @@
   .evaluator   .node-card-tag { color: var(--eval-color); }
   .situational .node-card-tag { color: #4a6070; }
   .node-card textarea {
-    width: 100%; min-height: 68px;
+    width: 100%; min-height: 90px;
     border: 1px solid var(--border); border-radius: 7px;
-    padding: .55rem .7rem; font-family: 'Outfit', sans-serif;
-    font-size: .8rem; color: var(--navy); resize: none;
+    padding: .6rem .75rem; font-family: 'Outfit', sans-serif;
+    font-size: .82rem; color: var(--navy); resize: vertical;
     outline: none; background: #fafbfd; transition: border-color .2s;
     display: block;
   }
@@ -340,12 +364,14 @@
 
   /* ── MAIN CIRCLE AREA ── */
   .main-circle-area {
-    flex: 1;
+    grid-column: 2;
+    grid-row: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.25rem;
     z-index: 1;
+    justify-self: center;
   }
 
   .main-circle-wrap {
@@ -431,11 +457,21 @@
   footer strong { color: rgba(255,255,255,.75); font-weight: 600; }
 
   /* ── RESPONSIVE ── */
-  @media (max-width: 740px) {
-    .viz-stage { flex-direction: column; min-height: auto; gap: 2rem; }
-    .nodes-col { width: 100%; }
-    .node-group { flex-direction: row; }
-    .node-card { min-width: 0; }
+  @media (max-width: 820px) {
+    .viz-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    #node-sit, #node-actor, #node-eval {
+      flex-direction: row;
+      width: 100%;
+      max-width: 480px;
+      justify-content: flex-start;
+    }
+    #node-sit .node-card { width: auto; flex: 1; }
+    .node-card { min-width: 0; flex: 1; }
     .main-circle-area { width: 100%; }
     .pct-bar { width: 100%; max-width: 280px; }
   }
@@ -558,60 +594,39 @@
       <!-- SVG connector lines (absolutely positioned behind everything) -->
       <svg class="connectors-svg" id="connectors-svg" xmlns="http://www.w3.org/2000/svg"></svg>
 
-      <!-- LEFT: Three node groups -->
-      <div class="nodes-col" id="nodes-col">
-
-        <!-- Actor -->
-        <div class="node-group actor" id="node-actor">
-          <div class="node-card">
-            <span class="node-card-tag">Actor Error</span>
-            <textarea id="actor-notes" placeholder="e.g. limited experience, poor time management, distraction, skill gaps..."></textarea>
-          </div>
-          <div class="node-circle" id="nc-actor">
-            <span class="node-val" id="actor-val">5</span>
-            <span class="node-pct" id="actor-pct">33%</span>
-            <div class="stepper-row">
-              <button class="step-btn" onclick="step('actor',-1)" aria-label="decrease actor">−</button>
-              <button class="step-btn" onclick="step('actor',1)"  aria-label="increase actor">+</button>
-            </div>
+      <!-- TOP CENTER: Situational — card above, circle below pointing down -->
+      <div class="node-group situational" id="node-sit">
+        <div class="node-card">
+          <span class="node-card-tag">Situational Error</span>
+          <textarea id="sit-notes" placeholder="e.g. time pressure, resource constraints, external events, organizational dynamics..."></textarea>
+        </div>
+        <div class="node-circle" id="nc-sit">
+          <span class="node-val" id="sit-val">5</span>
+          <span class="node-pct" id="sit-pct">33%</span>
+          <div class="stepper-row">
+            <button class="step-btn" onclick="step('sit',-1)" aria-label="decrease situational">−</button>
+            <button class="step-btn" onclick="step('sit',1)"  aria-label="increase situational">+</button>
           </div>
         </div>
+      </div>
 
-        <!-- Evaluator -->
-        <div class="node-group evaluator" id="node-eval">
-          <div class="node-card">
-            <span class="node-card-tag">Evaluator Error</span>
-            <textarea id="eval-notes" placeholder="e.g. incomplete context, bias, preconceived ideas, limited domain knowledge..."></textarea>
-          </div>
-          <div class="node-circle" id="nc-eval">
-            <span class="node-val" id="eval-val">5</span>
-            <span class="node-pct" id="eval-pct">33%</span>
-            <div class="stepper-row">
-              <button class="step-btn" onclick="step('eval',-1)" aria-label="decrease evaluator">−</button>
-              <button class="step-btn" onclick="step('eval',1)"  aria-label="increase evaluator">+</button>
-            </div>
+      <!-- LEFT: Actor — card left, circle right (circle faces center) -->
+      <div class="node-group actor" id="node-actor">
+        <div class="node-card">
+          <span class="node-card-tag">Actor Error</span>
+          <textarea id="actor-notes" placeholder="e.g. limited experience, poor time management, distraction, skill gaps..."></textarea>
+        </div>
+        <div class="node-circle" id="nc-actor">
+          <span class="node-val" id="actor-val">5</span>
+          <span class="node-pct" id="actor-pct">33%</span>
+          <div class="stepper-row">
+            <button class="step-btn" onclick="step('actor',-1)" aria-label="decrease actor">−</button>
+            <button class="step-btn" onclick="step('actor',1)"  aria-label="increase actor">+</button>
           </div>
         </div>
+      </div>
 
-        <!-- Situational -->
-        <div class="node-group situational" id="node-sit">
-          <div class="node-card">
-            <span class="node-card-tag">Situational Error</span>
-            <textarea id="sit-notes" placeholder="e.g. time pressure, resource constraints, external events, organizational dynamics..."></textarea>
-          </div>
-          <div class="node-circle" id="nc-sit">
-            <span class="node-val" id="sit-val">5</span>
-            <span class="node-pct" id="sit-pct">33%</span>
-            <div class="stepper-row">
-              <button class="step-btn" onclick="step('sit',-1)" aria-label="decrease situational">−</button>
-              <button class="step-btn" onclick="step('sit',1)"  aria-label="increase situational">+</button>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /nodes-col -->
-
-      <!-- RIGHT: Main circle visualization -->
+      <!-- CENTER: Main circle visualization -->
       <div class="main-circle-area">
         <div class="main-circle-wrap">
           <svg id="main-svg" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg"></svg>
@@ -628,6 +643,22 @@
         </div>
 
         <p class="viz-summary" id="viz-summary">Actor 33% · Evaluator 33% · Situational 33%</p>
+      </div>
+
+      <!-- RIGHT: Evaluator — circle left (faces center), card right -->
+      <div class="node-group evaluator" id="node-eval">
+        <div class="node-circle" id="nc-eval">
+          <span class="node-val" id="eval-val">5</span>
+          <span class="node-pct" id="eval-pct">33%</span>
+          <div class="stepper-row">
+            <button class="step-btn" onclick="step('eval',-1)" aria-label="decrease evaluator">−</button>
+            <button class="step-btn" onclick="step('eval',1)"  aria-label="increase evaluator">+</button>
+          </div>
+        </div>
+        <div class="node-card">
+          <span class="node-card-tag">Evaluator Error</span>
+          <textarea id="eval-notes" placeholder="e.g. incomplete context, bias, preconceived ideas, limited domain knowledge..."></textarea>
+        </div>
       </div>
 
     </div><!-- /viz-stage -->
