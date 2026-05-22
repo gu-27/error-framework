@@ -76,6 +76,7 @@
   .section.bg-white  { background: #fff; }
   .section.bg-tool   { background: #f0f3f8; border-top: 1px solid var(--border); }
   .container { max-width: 1000px; margin: 0 auto; }
+  .container--wide { max-width: 1240px; }
 
   .section-label {
     font-size: .6rem; font-weight: 700; letter-spacing: .15em;
@@ -274,10 +275,11 @@
   /* Cards */
   .node-card {
     flex: 1;
+    min-width: 220px;
     background: white;
     border: 1.5px solid var(--border);
     border-radius: 12px;
-    padding: 1rem 1.1rem;
+    padding: 1.1rem 1.25rem 1rem;
     position: relative;
     overflow: hidden;
   }
@@ -295,16 +297,6 @@
   .actor       .node-card-tag { color: var(--actor-color); }
   .evaluator   .node-card-tag { color: var(--eval-color); }
   .situational .node-card-tag { color: #4a6070; }
-  .node-card textarea {
-    width: 100%; min-height: 90px;
-    border: 1px solid var(--border); border-radius: 7px;
-    padding: .6rem .75rem; font-family: 'Outfit', sans-serif;
-    font-size: .82rem; color: var(--navy); resize: vertical;
-    outline: none; background: #fafbfd; transition: border-color .2s;
-    display: block;
-  }
-  .node-card textarea:focus { border-color: #aab3c0; background: white; }
-  .node-card textarea::placeholder { color: #c2c9d2; font-style: normal; }
 
   /* Node circles */
   .node-circle {
@@ -435,6 +427,90 @@
   .pct-seg.actor-seg   { background: var(--actor-color); }
   .pct-seg.eval-seg    { background: var(--eval-color); }
   .pct-seg.sit-seg     { background: var(--sit-color); }
+
+  /* ── CHIP SYSTEM ── */
+  .chip-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem;
+    min-height: 52px;
+    padding: .5rem 0 .65rem;
+    align-content: flex-start;
+  }
+  .chip-list:empty::after {
+    content: 'No factors added yet';
+    font-size: .75rem;
+    color: #d0d6de;
+    font-style: italic;
+    align-self: center;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    padding: .3rem .7rem .3rem .8rem;
+    border-radius: 20px;
+    font-size: .78rem;
+    font-weight: 500;
+    line-height: 1.3;
+    cursor: pointer;
+    transition: opacity .15s, transform .1s;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+  .chip:hover { opacity: .7; transform: scale(.97); }
+  .chip-actor { background: rgba(4,30,66,.09);    color: var(--actor-color); border: 1px solid rgba(4,30,66,.2); }
+  .chip-eval  { background: rgba(200,16,46,.08);  color: var(--eval-color);  border: 1px solid rgba(200,16,46,.18); }
+  .chip-sit   { background: rgba(122,143,166,.13); color: #385568;           border: 1px solid rgba(122,143,166,.3); }
+
+  .chip-x {
+    font-size: .72rem;
+    opacity: .5;
+    margin-left: 1px;
+  }
+
+  .chip-input-row {
+    display: flex;
+    gap: .45rem;
+    align-items: stretch;
+    border-top: 1px solid var(--border);
+    padding-top: .65rem;
+    margin-top: .1rem;
+  }
+  .chip-input {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: .5rem .7rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: .82rem;
+    color: var(--navy);
+    outline: none;
+    background: #fafbfd;
+    transition: border-color .2s;
+  }
+  .chip-input:focus { border-color: #aab3c0; background: white; }
+  .chip-input::placeholder { color: #c8cfd8; }
+
+  .chip-add-btn {
+    padding: .45rem .85rem;
+    border-radius: 7px;
+    border: 1.5px solid var(--border);
+    background: white;
+    font-family: 'Outfit', sans-serif;
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background .15s, border-color .15s, color .15s;
+  }
+  .actor       .chip-add-btn:hover { border-color: var(--actor-color); color: var(--actor-color); background: rgba(4,30,66,.05); }
+  .evaluator   .chip-add-btn:hover { border-color: var(--eval-color);  color: var(--eval-color);  background: rgba(200,16,46,.04); }
+  .situational .chip-add-btn:hover { border-color: var(--sit-color);   color: #385568;            background: rgba(122,143,166,.07); }
 
   /* ── RESET BUTTON ── */
   .reset-btn {
@@ -579,7 +655,7 @@
 
 <!-- SECTION 2 — INTERACTIVE TOOL -->
 <section class="section bg-tool">
-  <div class="container">
+  <div class="container container--wide">
     <p class="section-label">Interactive Tool</p>
     <h2 class="section-title">Analyze a Problem or Negative Outcome</h2>
     <p class="section-intro">Name the problem below, then use + / − to weight each error source. The circle updates proportionally as you adjust the values.</p>
@@ -598,7 +674,11 @@
       <div class="node-group situational" id="node-sit">
         <div class="node-card">
           <span class="node-card-tag">Situational Error</span>
-          <textarea id="sit-notes" placeholder="e.g. time pressure, resource constraints, external events, organizational dynamics..."></textarea>
+          <div class="chip-list" id="sit-chips"></div>
+          <div class="chip-input-row">
+            <input class="chip-input" id="sit-input" type="text" placeholder="Add a factor, press Enter…" onkeydown="chipKeydown(event,'sit')">
+            <button class="chip-add-btn" onclick="addChip('sit')">+ Add</button>
+          </div>
         </div>
         <div class="node-circle" id="nc-sit">
           <span class="node-val" id="sit-val">5</span>
@@ -614,7 +694,11 @@
       <div class="node-group actor" id="node-actor">
         <div class="node-card">
           <span class="node-card-tag">Actor Error</span>
-          <textarea id="actor-notes" placeholder="e.g. limited experience, poor time management, distraction, skill gaps..."></textarea>
+          <div class="chip-list" id="actor-chips"></div>
+          <div class="chip-input-row">
+            <input class="chip-input" id="actor-input" type="text" placeholder="Add a factor, press Enter…" onkeydown="chipKeydown(event,'actor')">
+            <button class="chip-add-btn" onclick="addChip('actor')">+ Add</button>
+          </div>
         </div>
         <div class="node-circle" id="nc-actor">
           <span class="node-val" id="actor-val">5</span>
@@ -657,7 +741,11 @@
         </div>
         <div class="node-card">
           <span class="node-card-tag">Evaluator Error</span>
-          <textarea id="eval-notes" placeholder="e.g. incomplete context, bias, preconceived ideas, limited domain knowledge..."></textarea>
+          <div class="chip-list" id="eval-chips"></div>
+          <div class="chip-input-row">
+            <input class="chip-input" id="eval-input" type="text" placeholder="Add a factor, press Enter…" onkeydown="chipKeydown(event,'eval')">
+            <button class="chip-add-btn" onclick="addChip('eval')">+ Add</button>
+          </div>
         </div>
       </div>
 
@@ -876,13 +964,48 @@
     connSvg.innerHTML = svgHtml;
   }
 
+  /* ── CHIP SYSTEM ── */
+  const chips = { actor: [], eval: [], sit: [] };
+
+  function addChip(type) {
+    const input = document.getElementById(type + '-input');
+    const val = input.value.trim();
+    if (!val) return;
+    chips[type].push(val);
+    input.value = '';
+    renderChips(type);
+    input.focus();
+    requestAnimationFrame(drawConnectors);
+  }
+
+  function removeChip(type, idx) {
+    chips[type].splice(idx, 1);
+    renderChips(type);
+    requestAnimationFrame(drawConnectors);
+  }
+
+  function chipKeydown(e, type) {
+    if (e.key === 'Enter') { e.preventDefault(); addChip(type); }
+  }
+
+  function renderChips(type) {
+    const container = document.getElementById(type + '-chips');
+    if (!container) return;
+    container.innerHTML = chips[type].map((c, i) =>
+      `<span class="chip chip-${type}" onclick="removeChip('${type}',${i})" title="Click to remove">${c} <span class="chip-x">×</span></span>`
+    ).join('');
+  }
+
   function resetTool() {
     vals.actor = 5; vals.eval = 5; vals.sit = 5;
     document.getElementById('problem').value      = '';
     document.getElementById('circle-label').value = '';
-    document.getElementById('actor-notes').value  = '';
-    document.getElementById('eval-notes').value   = '';
-    document.getElementById('sit-notes').value    = '';
+    chips.actor = []; chips.eval = []; chips.sit = [];
+    ['actor','eval','sit'].forEach(t => {
+      renderChips(t);
+      const inp = document.getElementById(t + '-input');
+      if (inp) inp.value = '';
+    });
     updateViz();
   }
 
